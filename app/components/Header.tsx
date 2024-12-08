@@ -21,9 +21,9 @@ const Header = () => {
   };
 
   return (
-    <header className="max-w-[1440px] mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20">
+    <header className="max-w-[1440px] mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20 shadow-xl">
 
-      <div className="max-w-[1240px] mx-auto h-[100px] flex items-center justify-between p-3">
+      <div className="max-w-[1240px] mx-auto h-[80px] flex items-center justify-between p-3">
         {/* Navbar */}
         <nav className="font-medium flex flex-1 justify-center">
         <ul className="hidden sm:flex gap-10">

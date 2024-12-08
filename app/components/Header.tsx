@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="max-w-[1440px] mx-auto bg-[#FBEBB5] sticky top-0 font-Poppins">
+    <header className="max-w-[1440px] mx-auto bg-[#FBEBB5] sticky top-0 font-Poppins border-b-[1px] border-black">
 
       <div className="max-w-[1240px] mx-auto h-[100px] flex items-center justify-between p-3">
         {/* Navbar */}

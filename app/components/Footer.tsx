@@ -23,7 +23,7 @@ const Footer = () => {
 
           {/* Help */}
           <div className="max-w-[140px] flex flex-col gap-[46px]">
-            <p className="text-[#9F9F9F] mb-[9px]">Links</p>
+            <p className="text-[#9F9F9F] mb-[9px]">Help</p>
             <Link href={"/ "} className="hover:underline cursor-pointe">Payment Options</Link>
             <Link href={"/"} className="hover:underline cursor-pointer">Returns</Link>
             <Link href={"/"} className="hover:underline cursor-pointer">Privacy Policies</Link>

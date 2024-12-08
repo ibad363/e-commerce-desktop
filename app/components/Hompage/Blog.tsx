@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const Blog = () => {
   return (
@@ -13,7 +14,7 @@ const Blog = () => {
             {/* 1st Blog */}
             <div className="flex flex-col items-center  max-w-[393px]">
                 <Image src={"assets/homepage/blog/1.svg"} alt="Blog Image" width={400} height={400}></Image>
-                <p className="text-xl mt-[20px] text-center">Going all-in with millennial design</p>
+                <Link href={"/blog"}><p className="text-xl mt-[20px] text-center">Going all-in with millennial design</p></Link>
                 <button className="text-2xl border-b border-black w-f mt-[10px]">Read More</button>
                 {/* Time and Date */}
                 <div className="flex gap-[19px] mt-[19px]">
@@ -31,7 +32,7 @@ const Blog = () => {
             {/* 2nd Blog */}
             <div className="flex flex-col items-center max-w-[393px]">
                 <Image src={"assets/homepage/blog/2.svg"} alt="Blog Image" width={400} height={400}></Image>
-                <p className="text-xl mt-[20px] text-center">Going all-in with millennial design</p>
+                <Link href={"/blog"}><p className="text-xl mt-[20px] text-center">Going all-in with millennial design</p></Link>
                 <button className="text-2xl border-b border-black w-f mt-[10px]">Read More</button>
                 {/* Time and Date */}
                 <div className="flex gap-[19px] mt-[19px]">
@@ -49,7 +50,7 @@ const Blog = () => {
             {/* 3rd Blog */}
             <div className="flex flex-col items-center max-w-[393px]">
                 <Image src={"assets/homepage/blog/3.svg"} alt="Blog Image" width={400} height={400}></Image>
-                <p className="text-xl mt-[20px] text-center">Going all-in with millennial design</p>
+                <Link href={"/blog"}><p className="text-xl mt-[20px] text-center">Going all-in with millennial design</p></Link>
                 <button className="text-2xl border-b border-black w-f mt-[10px]">Read More</button>
                 {/* Time and Date */}
                 <div className="flex gap-[19px] mt-[19px]">
@@ -67,7 +68,7 @@ const Blog = () => {
 
         {/* View All Post*/}
         <div className="flex justify-center mt-[75px]">
-            <button className="w-[104px] hover:border-b border-black">View All Post</button>
+            <Link href={"/blog"}><button className="w-[104px] hover:border-b border-black">View All Post</button></Link>
         </div>
     </div>
   )

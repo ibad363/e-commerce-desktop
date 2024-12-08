@@ -1,5 +1,6 @@
 import Image from "next/image"
 import ProductCard from "../components/ProductCard";
+import Link from "next/link";
 
 const Shop = () => {
 
@@ -26,8 +27,33 @@ const Shop = () => {
     <div className="max-w-[1440px] mx-auto font-Poppins">
 
         {/* Background Image */}
-        <div className="relative max-w-[1440px] h-[316px] -mt-2">
-            <Image src={"/assets/shop/bg.svg"} alt="background image" className="object-cover" fill></Image>
+        <div className="relative mb-2 h-[330px] ">
+        <Image
+          src="/assets/blog/Rectangle 1.svg"
+          alt="background image"
+          className="object-cover"
+          fill
+        ></Image>
+        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
+          <Image
+            src="/assets/blog/Meubel House_Logos-05.svg"
+            alt=""
+            width={60}
+            height={60}
+          />
+          <h1 className="text-4xl font-bold m-0 p-0">Shop</h1>
+          <div className="flex items-center gap-4">
+            <span>Home</span>
+            <Image
+              src="/assets/blog/vector.svg"
+              alt=""
+              width={10}
+              height={10}
+            />
+
+            <span>Shop</span>
+          </div>
+        </div>
         </div>
 
         {/* Filter Tab */}
@@ -38,7 +64,9 @@ const Shop = () => {
         {/* Products */}
         <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
             {productDetail.map((item, i) => {
-                return (<ProductCard key={i} name={item.name} price={item.price} imagePath={item.imagePath} />)
+                return (<>
+                <Link href="/productdetail"><ProductCard key={i} name={item.name} price={item.price} imagePath={item.imagePath} /></Link>
+                </>)
             })}
         </div>
 

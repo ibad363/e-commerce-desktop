@@ -1,10 +1,26 @@
 "use client"
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import ProductCard from '../components/ProductCard';
+import {
+    Sheet,
+    SheetContent,
+    SheetDescription,
+    SheetHeader,
+    SheetTitle,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 
 const ProductDetail = () => {
+
+    const sheetTrigger = useRef<HTMLButtonElement>(null);
+    const handleMenuClick = () => {
+      if (sheetTrigger.current) {
+        sheetTrigger.current.click();
+      }
+    };
+
     const productDetail = [
         {imagePath: "/assets/products/1.svg" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
         {imagePath: "/assets/products/2.svg" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
@@ -20,6 +36,7 @@ const ProductDetail = () => {
         "/assets/product-detail/3.svg",
         "/assets/product-detail/4.svg",
     ];
+
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
 
@@ -107,7 +124,7 @@ const ProductDetail = () => {
                     </div>
 
                     <div className='flex justify-center'>
-                        <button className='border-[1px] border-black px-12 py-[17px] rounded-[10px] flex items-center justify-center hover:text-black hover:bg-[#FBEBB5] hover:border-0'>Add To Cart</button>
+                        <button className='border-[1px] border-black px-12 py-[17px] rounded-[10px] flex items-center justify-center hover:text-black hover:bg-[#FBEBB5] hover:border-0' onClick={handleMenuClick}>Add To Cart</button>
                     </div>
                 </div>
 
@@ -187,6 +204,47 @@ const ProductDetail = () => {
             <div className="flex justify-center mt-[93px] mb-[103px]">
                 <button className="w-[84px] hover:border-b border-black">View More</button>
             </div>
+        </div>
+
+        {/* cart option */}
+        <div>
+            <Sheet>
+                <SheetTrigger ref={sheetTrigger}></SheetTrigger>
+                <SheetContent className="w-[300px] sm:w-[540px] bg-white h-[746px]">
+                    <SheetHeader>
+                        <SheetTitle className='text-2xl font-semibold'>Shopping Cart</SheetTitle>
+                        <SheetDescription>
+                            <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
+
+                            <div className='flex gap-4 items-center mt-[42px]'>
+                                <div className='w-[120px] h-[100px]'>
+                                    <Image src={images[active]} width={121} height={114} alt='Product Image' className='w-full bg-[#FFF9E5] flex p-3 justify-center items-center rounded' />
+                                </div>
+                                <div className='flex flex-col items-center justify-center'>
+                                <p>Asgaard sofa</p>
+                                <div>
+                                    1 X <span className='ml-[2px] text-[#B88E2F]'>Rs. 250,000.00</span>
+                                </div>
+                                </div>
+                                <div><img src="/assets/product-detail/discard.svg" alt="" /></div>
+                            </div>
+
+                            <div className='flex justify-between mt-16'>
+                                <p>Subtotal</p>
+                                <p className='text-[#B88E2F] font-semibold'>Rs. 250,000.00</p>
+                            </div>
+
+                            <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
+
+                            <div className='mt-[26px] flex gap-3'>
+                                <button className='px-[37px] py-3 border-black border rounded-[50px]'>View Cart</button>
+                                <button className='px-[37px] py-3 border-black border rounded-[50px]'>Checkout</button>
+                            </div>
+                        </SheetDescription>
+                    </SheetHeader>
+                </SheetContent>
+            </Sheet>
+
         </div>
     </div>
 )}

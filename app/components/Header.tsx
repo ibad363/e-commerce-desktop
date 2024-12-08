@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="max-w-[1440px] mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20 shadow-xl">
+    <header className="w-full mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20 shadow-xl">
 
       <div className="max-w-[1240px] mx-auto h-[80px] flex items-center justify-between p-3">
         {/* Navbar */}
@@ -38,17 +38,17 @@ const Header = () => {
             
             </li>
             <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-            <Link href="/">Contact</Link>
+            <Link href="/contact">Contact</Link>
             </li>
         </ul>
         </nav>
 
         {/* Icons */}
         <div className="flex items-center gap-8">
-          <UserCheck />
+          <Link href={"/account"}><UserCheck /></Link>
           <Search />
           <Heart />
-          <ShoppingCart/>
+          <Link href={"/cart"}><ShoppingCart/></Link>
           <Menu className="sm:hidden cursor-pointer" onClick={handleMenuClick}/>
         </div>
 
@@ -74,7 +74,7 @@ const Header = () => {
 
                   </li>
                   <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-                    <Link href="/">Contact</Link>
+                    <Link href="/contact">Contact</Link>
                   </li>
                 </ul>
               </SheetDescription>

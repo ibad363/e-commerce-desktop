@@ -21,7 +21,7 @@ const Header = () => {
   };
 
   return (
-    <header className="max-w-[1440px] mx-auto bg-[#FBEBB5] sticky top-0 font-Poppins border-b-[1px] border-black z-20">
+    <header className="max-w-[1440px] mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20">
 
       <div className="max-w-[1240px] mx-auto h-[100px] flex items-center justify-between p-3">
         {/* Navbar */}
@@ -31,7 +31,7 @@ const Header = () => {
               <Link href="/">Home</Link>
             </li>
             <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-            <Link href="/">Shop</Link>
+            <Link href="/shop">Shop</Link>
             </li>
             <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
             <Link href="/">About</Link>
@@ -58,7 +58,7 @@ const Header = () => {
       <div className="hidden">
         <Sheet>
           <SheetTrigger ref={sheetTrigger}></SheetTrigger>
-          <SheetContent className="bg-[#FBEBB5] w-[15rem]" side={"left"}>
+          <SheetContent className="bg-white w-[15rem]" side={"left"}>
             <SheetHeader>
               <SheetTitle></SheetTitle>
               <SheetDescription>
@@ -67,7 +67,7 @@ const Header = () => {
                     <Link href="/">Home</Link>
                   </li>
                   <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-                    <Link href="/">Shop</Link>
+                    <Link href="/shop">Shop</Link>
                   </li>
                   <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
                     <Link href="/">About</Link>

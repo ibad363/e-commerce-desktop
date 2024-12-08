@@ -2,10 +2,10 @@ import ProductCard from "../ProductCard"
 
 const TopPicks = () => {
     const productDetail = [
-        {imagePath: "/assets/products/p1.svg" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/p2.svg" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/p3.svg" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/p4.svg" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/1.svg" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/2.svg" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/3.svg" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/4.svg" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
     ]
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins font-medium">

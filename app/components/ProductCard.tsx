@@ -4,7 +4,7 @@ import Link from "next/link"
 const ProductCard = (props: {name: string, price: string , imagePath: string}) => {
 
   return (
-    <div className="max-w-[287px] h-[350px] border-2">
+    <div className="max-w-[287px] h-[350px]">
 
         {/* Image */}
         <div className="h-[240px] w-[287px] p-2 flex flex-col items-center justify-center">

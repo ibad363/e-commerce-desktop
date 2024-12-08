@@ -11,7 +11,7 @@ const NewArrival = () => {
         {/* Description */}
         <div className="flex flex-col items-center justify-center">
             <h5 className="text-2xl font-medium">New Arrivals</h5>
-            <h2 className="text-5xl font-bold">Asgaard sofa</h2>
+            <h2 className="text-5xl font-bold text-center">Asgaard sofa</h2>
             <button className="border-black border text-xl px-[74px] py-[17px] mt-8 hover:text-white hover:border-none hover:bg-black">Order Now</button>
         </div>
     </div>

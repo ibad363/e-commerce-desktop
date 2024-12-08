@@ -1,4 +1,6 @@
+import Blog from "./Blog"
 import Hero from "./Hero"
+import Instagram from "./Instagram"
 import NewArrival from "./NewArrival"
 import TopPicks from "./TopPicks"
 
@@ -8,6 +10,8 @@ const Homepage = () => {
     <Hero/>
     <TopPicks/>
     <NewArrival/>
+    <Blog/>
+    <Instagram/>
     </>
   )
 }

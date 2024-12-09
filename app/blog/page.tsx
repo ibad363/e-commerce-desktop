@@ -42,35 +42,35 @@ const BlogPage = () => {
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
 
-      {/* Background Image */}
-      <div className="relative mb-2 h-[330px] ">
-        <Image
-          src="/assets/blog/Rectangle 1.svg"
-          alt="background image"
-          className="object-cover"
-          fill
-        ></Image>
-        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
+        {/* Background Image */}
+        <div className="relative mb-2 h-[330px] ">
           <Image
-            src="/assets/blog/Meubel House_Logos-05.svg"
-            alt=""
-            width={60}
-            height={60}
-          />
-          <h1 className="text-4xl font-bold m-0 p-0">Blog</h1>
-          <div className="flex items-center gap-4">
-            <span>Home</span>
+            src="/assets/blog/Rectangle 1.svg"
+            alt="background image"
+            className="object-cover"
+            fill
+          ></Image>
+          <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
             <Image
-              src="/assets/blog/vector.svg"
+              src="/assets/blog/Meubel House_Logos-05.svg"
               alt=""
-              width={10}
-              height={10}
+              width={60}
+              height={60}
             />
+            <h1 className="text-4xl font-bold m-0 p-0">Blog</h1>
+            <div className="flex items-center gap-4">
+              <span>Home</span>
+              <Image
+                src="/assets/blog/vector.svg"
+                alt=""
+                width={10}
+                height={10}
+              />
 
-            <span>Blog</span>
+              <span>Blog</span>
+            </div>
           </div>
         </div>
-      </div>
 
       {/* content */}
       <div className="max-w-[1200px] mx-auto flex md:flex-row flex-col gap-2">

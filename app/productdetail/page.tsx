@@ -31,10 +31,10 @@ const ProductDetail = () => {
     const [active,setActive] = useState(0)
 
     const images = [
-        "/assets/product-detail/1.svg",
-        "/assets/product-detail/2.svg",
-        "/assets/product-detail/3.svg",
-        "/assets/product-detail/4.svg",
+        "/assets/product-detail/1.png",
+        "/assets/product-detail/2.png",
+        "/assets/product-detail/3.png",
+        "/assets/product-detail/4.png",
     ];
 
     return (

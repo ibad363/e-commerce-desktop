@@ -178,10 +178,10 @@ const ProductDetail = () => {
 
             <div className='max-w-[1240px] mx-auto px-2 mt-[36px] flex flex-col lg:flex-row items-center gap-[29px]'>
                 <div className='bg-[#f3e4b5] rounded-[10px] max-w-[605px] h-[250px] sm:h-[348px]'>
-                    <Image src={"/assets/product-detail/s1.svg"} alt="Sofa Image" width={400} height={400} className='object-contain w-full h-full'></Image>
+                    <Image src={"/assets/product-detail/s1.png"} alt="Sofa Image" width={400} height={400} className='object-contain w-full h-full'></Image>
                 </div>
                 <div className='bg-[#f3e4b5] rounded-[10px] max-w-[605px] h-[250px] sm:h-[348px]'>
-                    <Image src={"/assets/product-detail/s2.svg"} alt="Sofa Image" width={400} height={400} className='object-contain w-full h-full'></Image>
+                    <Image src={"/assets/product-detail/s2.png"} alt="Sofa Image" width={400} height={400} className='object-contain w-full h-full'></Image>
                 </div>
             </div>
 

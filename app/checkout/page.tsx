@@ -1,44 +1,15 @@
 import { Button } from '@/components/ui/button'
-import React from 'react'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
-import Image from 'next/image';
+import BgImage from '../components/BgImage';
 
 const Checkout = () => {
     
   return (
-
     <div className='max-w-[1440px] mx-auto font-Poppins flex flex-col gap-3'>
       {/* Background Image */}
-      <div className="relative mb-2 h-[330px] ">
-        <Image
-          src="/assets/blog/Rectangle 1.svg"
-          alt="background image"
-          className="object-cover"
-          fill
-        ></Image>
-        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
-          <Image
-            src="/assets/blog/Meubel House_Logos-05.svg"
-            alt=""
-            width={60}
-            height={60}
-          />
-          <h1 className="text-4xl font-bold m-0 p-0">Checkout</h1>
-          <div className="flex items-center gap-4">
-            <span>Home</span>
-            <Image
-              src="/assets/blog/vector.svg"
-              alt=""
-              width={10}
-              height={10}
-            />
-
-            <span>Checkout</span>
-          </div>
-        </div>
-      </div>
+      <BgImage pageName="Checkout"/>
 
     <div className='flex md:flex-row flex-col gap-2 max-w-[1200px] mx-auto my-3 '>
   

@@ -13,27 +13,27 @@ const BlogPage = () => {
   ];
   const posts = [
     {
-      image: "/assets/blog/Rectangle 69 (4).svg",
+      image: "/assets/blog/b1.svg",
       title: "Going all-in with millennial design",
       date: "03 Aug 2022",
     },
     {
-      image: "/assets/blog/Rectangle 69 (3).svg",
+      image: "/assets/blog/b2.svg",
       title: "Exploring new ways of decorating",
       date: "03 Aug 2022",
     },
     {
-      image: "/assets/blog/Rectangle 69 (2).svg",
+      image: "/assets/blog/b3.svg",
       title: "Handmade pieces that took time to make",
       date: "03 Aug 2022",
     },
     {
-      image: "/assets/blog/Rectangle 69 (1).svg",
+      image: "/assets/blog/b4.svg",
       title: "Modern home in Milan",
       date: "03 Aug 2022",
     },
     {
-      image: "/assets/blog/Rectangle 69.svg",
+      image: "/assets/blog/b5.svg",
       title: "Colorful office redesign",
       date: "03 Aug 2022",
     },
@@ -45,14 +45,14 @@ const BlogPage = () => {
         {/* Background Image */}
         <div className="relative mb-2 h-[330px] ">
           <Image
-            src="/assets/blog/Rectangle 1.svg"
+            src="/assets/others/bg.webp"
             alt="background image"
             className="object-cover"
             fill
           ></Image>
           <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
             <Image
-              src="/assets/blog/Meubel House_Logos-05.svg"
+              src="/assets/others/bg-logo.svg"
               alt=""
               width={60}
               height={60}
@@ -77,33 +77,33 @@ const BlogPage = () => {
         {/* 3 Blogs */}
         <div className=" flex flex-col">
           <Blogs
-            image="/assets/blog/Rectangle 68.svg"
+            image="/assets/blog/1.webp"
             title="Going all-in with millennial design"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum."
             tags={[
-              { icon: "/assets/blog/vector (1).svg", label: "Admin" },
-              { icon: "/assets/blog/vector (2).svg", label: "14 Oct 2022" },
-              { icon: "/assets/blog/vector (3).svg", label: "Wood" },
+              { icon: "/assets/blog/admin.svg", label: "Admin"},
+              { icon: "/assets/blog/calendar.svg", label: "14 Oct 2022" },
+              { icon: "/assets/blog/tag.svg", label: "Wood" },
             ]}
           />
           <Blogs
-            image="/assets/blog/Rectangle 68.svg"
+            image="/assets/blog/1.webp"
             title="Exploring new ways of decorating"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum."
             tags={[
-              { icon: "/assets/blog/vector (1).svg", label: "Admin" },
-              { icon: "/assets/blog/vector (2).svg", label: "14 Oct 2022" },
-              { icon: "/assets/blog/vector (3).svg", label: "Wood" },
+              { icon: "/assets/blog/admin.svg", label: "Admin" },
+              { icon: "/assets/blog/calendar.svg", label: "14 Oct 2022" },
+              { icon: "/assets/blog/tag.svg", label: "Handmade" },
             ]}
           />
           <Blogs
-            image="/assets/blog/Rectangle 68.svg"
+            image="/assets/blog/1.webp"
             title="Handmade pieces that took time to make"
             description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Mus mauris vitae ultricies leo integer malesuada nunc. In nulla posuere sollicitudin aliquam ultrices. Morbi blandit cursus risus at ultrices mi tempus imperdiet. Libero enim sed faucibus turpis in. Cursus mattis molestie a iaculis at erat. Nibh cras pulvinar mattis nunc sed blandit libero. Pellentesque elit ullamcorper dignissim cras tincidunt. Pharetra et ultrices neque ornare aenean euismod elementum."
             tags={[
-              { icon: "/assets/blog/vector (1).svg", label: "Admin" },
-              { icon: "/assets/blog/vector (2).svg", label: "14 Oct 2022" },
-              { icon: "/assets/blog/vector (3).svg", label: "Wood" },
+              { icon: "/assets/blog/admin.svg", label: "Admin" },
+              { icon: "/assets/blog/calendar.svg", label: "14 Oct 2022" },
+              { icon: "/assets/blog/tag.svg", label: "Wood" },
             ]}
           />
         </div>
@@ -184,7 +184,7 @@ const Blogs = ({ image, title, description, tags }: any) => {
       <div className="flex gap-4 mt-4">
         {tags.map((tag: any, index: number) => (
           <div key={index} className="flex items-center gap-2">
-            <Image src={tag.icon} alt={tag.label} width={20} height={20} className="rounded-full" />
+            <Image src={tag.icon} alt={tag.label} width={25} height={25} />
             <span>{tag.label}</span>
           </div>
         ))}

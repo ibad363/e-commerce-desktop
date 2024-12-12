@@ -1,40 +1,13 @@
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label";
-
-import Image from "next/image"
+import BgImage from "../components/BgImage";
 
 const Account = () => {
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
         {/* Background Image */}
-        <div className="relative mb-2 h-[330px] ">
-            <Image
-                src="/assets/blog/Rectangle 1.svg"
-                alt="background image"
-                className="object-cover"
-                fill
-            ></Image>
-            <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
-                <Image
-                    src="/assets/blog/Meubel House_Logos-05.svg"
-                    alt=""
-                    width={60}
-                    height={60}
-                />
-                <h1 className="text-4xl font-bold m-0 p-0">My Account</h1>
-                <div className="flex items-center gap-4">
-                    <span>Home</span>
-                    <Image
-                        src="/assets/blog/vector.svg"
-                        alt=""
-                        width={10}
-                        height={10}
-                    />
+        <BgImage pageName="Account"/>
 
-                    <span>My Account</span>
-                </div>
-            </div>
-        </div>
         {/* Login / signup */}
         <div className="flex flex-wrap gap-6 items-start justify-center p-6">
 

@@ -1,44 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import Image from "next/image";
 import React from "react";
+import BgImage from "../components/BgImage";
 
 const Contact = () => {
   return (
     <div className="max-w-1440px mx-auto font-Poppins ">
       {/* Background Image */}
-      <div className="relative mb-2 h-[330px] ">
-        {/* bg */}
-        <Image
-          src="/assets/blog/Rectangle 1.svg"
-          alt="background image"
-          className="object-cover"
-          fill
-        ></Image>
-        {/* Content */}
-        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
-          {/* Logo */}
-          <Image
-            src="/assets/blog/Meubel House_Logos-05.svg"
-            alt=""
-            width={60}
-            height={60}
-          />
-          <h1 className="text-4xl font-bold m-0 p-0">Contact</h1>
-          <div className="flex items-center gap-4">
-            <span>Home</span>
-            {/* Right Icon */}
-            <Image
-              src="/assets/blog/vector.svg"
-              alt=""
-              width={10}
-              height={10}
-            />
-            <span>Contact</span>
-          </div>
-        </div>
-      </div>
+      <BgImage pageName="Contact"/>
 
       <div className="flex flex-wrap items-start justify-center gap-8 p-6 lg:p-12">
         {/* Contact Details Section */}

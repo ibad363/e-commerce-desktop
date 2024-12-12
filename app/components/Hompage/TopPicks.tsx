@@ -12,7 +12,7 @@ const TopPicks = () => {
         {/* Tables */}
         <div className="bg-[#FAF4F4] py-[51px] flex flex-col md:flex-row items-center justify-center gap-[30px] p-4">
             {/* 1st Table */}
-            <div className="max-w-[550px] h-[400px] md:h-[500px] w-full flex items-end justify-start md:pl-[105px] md:pb-[50px] p-4 relative border-2 ">
+            <div className="max-w-[550px] h-[320px] xs:h-[375px] sm:h-[400px] md:h-[500px] w-full flex items-end justify-start md:pl-[105px] md:pb-[50px] p-4 relative">
                 <img src="/assets/homepage/top-picks/1.svg" alt="Table" className="  absolute right-4 top-2"/>
                 <div className="relative">
                     <h4 className="text-4xl">Side table</h4>
@@ -20,7 +20,7 @@ const TopPicks = () => {
                 </div>
             </div>
             {/* 2nd Table */}
-            <div className="max-w-[550px] h-[400px] md:h-[500px] w-full flex items-end justify-start md:pl-[105px] md:pb-[50px] p-4 relative border-2 ">
+            <div className="max-w-[550px] h-[320px] xs:h-[375px] sm:h-[400px] md:h-[500px] w-full flex items-end justify-start md:pl-[105px] md:pb-[50px] p-4 relative">
                 <img src="/assets/homepage/top-picks/2.svg" alt="Table" className="  absolute right-4 top-2"/>
                 <div className="relative">
                     <h4 className="text-4xl">Side table</h4>

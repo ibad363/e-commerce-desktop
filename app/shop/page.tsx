@@ -1,60 +1,34 @@
 import Image from "next/image"
 import ProductCard from "../components/ProductCard";
 import Link from "next/link";
+import BgImage from "../components/BgImage";
 
 const Shop = () => {
 
     const productDetail = [
-        {imagePath: "/assets/products/1.svg" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/2.svg" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/3.svg" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/4.svg" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/5.svg" , name: "Grain coffee table", price: "Rs. 15,000.00"},
-        {imagePath: "/assets/products/6.svg" , name: "Kent coffee table", price: "Rs. 225,000.00"},
-        {imagePath: "/assets/products/7.svg" , name: "Round coffee table_color 2", price: "Rs. 251,000.00"},
-        {imagePath: "/assets/products/8.svg" , name: "Reclaimed teak coffee table", price: "Rs. 25,200.00"},
-        {imagePath: "/assets/products/9.svg" , name: "Plain console_", price: "Rs. 258,200.00"},
-        {imagePath: "/assets/products/10.svg" , name: "Reclaimed teak Sideboard", price: "Rs. 20,000.00"},
-        {imagePath: "/assets/products/11.svg" , name: "SJP_0825", price: "Rs. 200,000.00"},
-        {imagePath: "/assets/products/12.svg" , name: "Bella chair and table", price: "Rs. 100,000.00"},
-        {imagePath: "/assets/products/13.svg" , name: "Granite square side table", price: "Rs. 100,000.00"},
-        {imagePath: "/assets/products/14.svg" , name: "Asgaard sofa", price: "Rs. 250,000.00"},
-        {imagePath: "/assets/products/15.svg" , name: "Maya sofa three seater", price: "Rs. 115,000.00"},
-        {imagePath: "/assets/products/16.svg" , name: "Outdoor sofa set", price: "Rs. 244,000.00"},
+        {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
+        {imagePath: "/assets/products/5.webp" , name: "Grain coffee table", price: "Rs. 15,000.00"},
+        {imagePath: "/assets/products/6.webp" , name: "Kent coffee table", price: "Rs. 225,000.00"},
+        {imagePath: "/assets/products/7.webp" , name: "Round coffee table_color 2", price: "Rs. 251,000.00"},
+        {imagePath: "/assets/products/8.webp" , name: "Reclaimed teak coffee table", price: "Rs. 25,200.00"},
+        {imagePath: "/assets/products/9.webp" , name: "Plain console_", price: "Rs. 258,200.00"},
+        {imagePath: "/assets/products/10.webp" , name: "Reclaimed teak Sideboard", price: "Rs. 20,000.00"},
+        {imagePath: "/assets/products/11.webp" , name: "SJP_0825", price: "Rs. 200,000.00"},
+        {imagePath: "/assets/products/122.webp" , name: "Bella chair and table", price: "Rs. 100,000.00"},
+        {imagePath: "/assets/products/13.webp" , name: "Granite square side table", price: "Rs. 100,000.00"},
+        {imagePath: "/assets/products/14.webp" , name: "Asgaard sofa", price: "Rs. 250,000.00"},
+        {imagePath: "/assets/products/15.webp" , name: "Maya sofa three seater", price: "Rs. 115,000.00"},
+        {imagePath: "/assets/products/16.webp" , name: "Outdoor sofa set", price: "Rs. 244,000.00"},
     ]
 
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
 
         {/* Background Image */}
-        <div className="relative mb-2 h-[330px] ">
-        <Image
-          src="/assets/blog/Rectangle 1.svg"
-          alt="background image"
-          className="object-cover"
-          fill
-        ></Image>
-        <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
-          <Image
-            src="/assets/blog/Meubel House_Logos-05.svg"
-            alt=""
-            width={60}
-            height={60}
-          />
-          <h1 className="text-4xl font-bold m-0 p-0">Shop</h1>
-          <div className="flex items-center gap-4">
-            <span>Home</span>
-            <Image
-              src="/assets/blog/vector.svg"
-              alt=""
-              width={10}
-              height={10}
-            />
-
-            <span>Shop</span>
-          </div>
-        </div>
-        </div>
+        <BgImage pageName="Shop"/>
 
         {/* Filter Tab */}
         <div className="mt-[47px]">

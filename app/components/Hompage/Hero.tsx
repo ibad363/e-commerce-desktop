@@ -11,7 +11,7 @@ const Hero = () => {
         </div>
 
         <div className="max-w-[600px] md:h-[580px] flex items-center">
-          <Image src={"/assets/homepage/hero/Rocket single seater 1.svg"} alt="Sofa Image" width={600} height={440}></Image>
+          <Image src={"/assets/homepage/hero/Rocket single seater 1.webp"} alt="Sofa Image" width={600} height={440}></Image>
         </div>
       </div>
     </div>

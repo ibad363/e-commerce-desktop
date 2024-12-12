@@ -22,7 +22,7 @@ const CartPage = () => {
                 <td className="py-6 px-6">
                   <div className="flex items-center gap-4">
                     <img
-                      src="/assets/cart/Mask group.svg"
+                      src="/assets/products/14.webp"
                       alt="Asgaard Sofa"
                       className="w-[70px] h-[70px] rounded-lg bg-[#FDF3DC]"
                     />

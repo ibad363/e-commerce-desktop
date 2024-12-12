@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
+import BgImage from "../components/BgImage";
 
 const BlogPage = () => {
   const categories = [
@@ -42,35 +43,9 @@ const BlogPage = () => {
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
 
-        {/* Background Image */}
-        <div className="relative mb-2 h-[330px] ">
-          <Image
-            src="/assets/others/bg.webp"
-            alt="background image"
-            className="object-cover"
-            fill
-          ></Image>
-          <div className="absolute inset-0 flex flex-col gap-2 items-center justify-center">
-            <Image
-              src="/assets/others/bg-logo.svg"
-              alt=""
-              width={60}
-              height={60}
-            />
-            <h1 className="text-4xl font-bold m-0 p-0">Blog</h1>
-            <div className="flex items-center gap-4">
-              <span>Home</span>
-              <Image
-                src="/assets/blog/vector.svg"
-                alt=""
-                width={10}
-                height={10}
-              />
-
-              <span>Blog</span>
-            </div>
-          </div>
-        </div>
+      {/* Background Image */}
+      <BgImage pageName="Blog"/>
+      
 
       {/* content */}
       <div className="max-w-[1200px] mx-auto flex md:flex-row flex-col gap-2">

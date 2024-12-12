@@ -34,7 +34,7 @@ const Header = () => {
             <Link href="/shop">Shop</Link>
             </li>
             <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-            <Link href="/">About</Link>
+            <Link href="/blog">Blog</Link>
             
             </li>
             <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
@@ -63,18 +63,18 @@ const Header = () => {
               <SheetTitle></SheetTitle>
               <SheetDescription>
                 <ul className="flex flex-col gap-10">
-                  <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-                    <Link href="/">Home</Link>
+                  <li>
+                    <Link href="/"  className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">Home</Link>
                   </li>
-                  <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-                    <Link href="/shop">Shop</Link>
+                  <li>
+                    <Link href="/shop" className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">Shop</Link>
                   </li>
-                  <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-                    <Link href="/">About</Link>
+                  <li>
+                    <Link href="/blog" className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">Blog</Link>
 
                   </li>
-                  <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
-                    <Link href="/contact">Contact</Link>
+                  <li>
+                    <Link href="/contact" className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">Contact</Link>
                   </li>
                 </ul>
               </SheetDescription>

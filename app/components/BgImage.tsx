@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const BgImage = (props:{pageName: string}) => {
   return (
-    <div className="relative mb-2 h-[316px]">
+    <div className="relative h-[316px]">
       {/* Bg Image */}
       <Image
         src="/assets/others/bg.webp"

@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
 
@@ -48,7 +49,7 @@ const Header = () => {
           <Link href={"/account"}><UserCheck /></Link>
           <Search />
           <Heart />
-          <Link href={"/cart"}><ShoppingCart/></Link>
+          <button onClick={handleMenuClick}><ShoppingCart /></button>
           <Menu className="sm:hidden cursor-pointer" onClick={handleMenuClick}/>
         </div>
 
@@ -77,6 +78,44 @@ const Header = () => {
                     <Link href="/contact" className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">Contact</Link>
                   </li>
                 </ul>
+              </SheetDescription>
+            </SheetHeader>
+          </SheetContent>
+        </Sheet>
+
+        {/* Cart */}
+        <Sheet>
+          <SheetTrigger ref={sheetTrigger}></SheetTrigger>
+          <SheetContent className="w-[300px] sm:w-[540px] bg-white h-[746px]">
+            <SheetHeader>
+              <SheetTitle className='text-2xl font-semibold'>Shopping Cart</SheetTitle>
+              <SheetDescription>
+                <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
+
+                <div className='flex gap-4 items-center mt-[42px]'>
+                  <div className='w-[120px] h-[100px]'>
+                    <Image src={"/assets/products/14.webp"} width={121} height={114} alt='Product Image' className='w-full bg-[#FFF9E5] flex p-3 justify-center items-center rounded' />
+                  </div>
+                  <div className='flex flex-col items-center justify-center'>
+                    <p>Asgaard sofa</p>
+                    <div>
+                      1 X <span className='ml-[2px] text-[#B88E2F]'>Rs. 250,000.00</span>
+                    </div>
+                  </div>
+                  <div><img src="/assets/product-detail/discard.svg" alt="" /></div>
+                </div>
+
+                <div className='flex justify-between mt-16'>
+                  <p>Subtotal</p>
+                  <p className='text-[#B88E2F] font-semibold'>Rs. 250,000.00</p>
+                </div>
+
+                <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
+
+                <div className='mt-[26px] flex gap-3'>
+                  <button className='px-[37px] py-3 border-black border rounded-[50px]'>View Cart</button>
+                  <button className='px-[37px] py-3 border-black border rounded-[50px]'>Checkout</button>
+                </div>
               </SheetDescription>
             </SheetHeader>
           </SheetContent>

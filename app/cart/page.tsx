@@ -4,8 +4,8 @@ import Link from "next/link";
 
 const CartPage = () => {
   return (
-    <div className="max-w-[1240px] mx-auto p-6 font-Poppins">
-      <div className="flex gap-2 lg:flex-row flex-col">
+    <div className="max-w-[1440px] mx-auto font-Poppins">
+      <div className="max-w-[1240px] mx-auto flex gap-2 lg:flex-row flex-col p-3 md:p-0">
         {/* Product Table */}
         <div className="flex flex-wrap">
           <table className="w-full border border-[#F5F5DC] text-left">
@@ -73,11 +73,11 @@ const CartPage = () => {
             <Link href={"/checkout"}>Check Out</Link>
           </Button>
         </div>
-
     </div>
+
         {/* Delivery Section*/}
-        <div className="mt-[92px] max-w-[1440px] mx-auto bg-[#FAF4F4] ">
-          <div className="py-[96px] max-w-[1240px] mx-auto flex">
+        <div className="mt-[92px] max-w-[1440px] mx-auto bg-[#FAF4F4] p-3 lg:p-0">
+          <div className="py-[96px] max-w-[1240px] mx-auto flex flex-col md:flex-row text-center md:text-start gap-4">
             {/* Free Delivery */}
             <div>
               <h4 className="text-[32px] font-medium">Free Delivery</h4>

@@ -78,7 +78,7 @@ const ProductDetail = () => {
                 </div>
 
                 {/* Product Description */}
-                <p className='text-[13px] mt-[18px] px-4 sm:px-10 text-center md:text-start'>Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.</p>
+                <p className='text-[13px] mt-[18px] text-center md:text-start'>Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.</p>
 
                 {/* Size */}
                 <div className='flex flex-col items-center md:items-start gap-[12px] mt-[22px]'>

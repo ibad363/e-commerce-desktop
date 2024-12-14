@@ -3,6 +3,7 @@ import React from "react";
 import { Input } from "@/components/ui/input";
 import { SearchIcon } from "lucide-react";
 import BgImage from "../components/BgImage";
+import DeliveryInfo from "../components/DeliveryInfo";
 
 const BlogPage = () => {
   const categories = [
@@ -135,6 +136,9 @@ const BlogPage = () => {
         </div>
         
       </div>
+
+      {/* Delivery Info*/}
+      <DeliveryInfo/>
     </div>
   );
 };
@@ -143,7 +147,7 @@ export default BlogPage;
 
 const Blogs = ({ image, title, description, tags }: {image: string, title:string, description: string , tags: {role : string, date: string, tag: string}}) => {
   return (
-    <div className="flex flex-col gap-2 mb-[54px] max-w-[817px]">
+    <div className="flex flex-col gap-2 mb-[54px] max-w-[817px] p-4 md:p-0">
       {/* Blog Image */}
       <Image src={image} alt="Blog Image" width={800} height={500} className="rounded-[10 px]" />
 

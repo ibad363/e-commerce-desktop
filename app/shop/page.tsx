@@ -2,6 +2,7 @@ import Image from "next/image"
 import ProductCard from "../components/ProductCard";
 import Link from "next/link";
 import BgImage from "../components/BgImage";
+import DeliveryInfo from "../components/DeliveryInfo";
 
 const Shop = () => {
 
@@ -52,28 +53,8 @@ const Shop = () => {
             <button className="bg-[#FFF9E5] hover:bg-[#FBEBB5] text-xl px-7 py-[15px] rounded-[10px] duration-300 transition-colors">Next</button>
         </div>
 
-        {/* Delivery Section*/}
-        <div className="mt-[92px] max-w-[1440px] mx-auto bg-[#FAF4F4] ">
-            <div className="py-[96px] max-w-[1240px] mx-auto flex">
-                {/* Free Delivery */}
-                <div>
-                    <h4 className="text-[32px] font-medium">Free Delivery</h4>
-                    <p className="text-xl text-[#9F9F9F]">For all oders over $50, consectetur adipim scing elit.</p>
-                </div>
-
-                {/* 90 Days Return */}
-                <div>
-                    <h4 className="text-[32px] font-medium">90 Days Return</h4>
-                    <p className="text-xl text-[#9F9F9F]">If goods have problems, consectetur adipim scing elit.</p>
-                </div>
-
-                {/* Secure Payment */}
-                <div>
-                    <h4 className="text-[32px] font-medium">Secure Payment</h4>
-                    <p className="text-xl text-[#9F9F9F]">100% secure payment, consectetur adipim scing elit.</p>
-                </div>
-            </div>
-        </div>
+    {/* Delivery Info*/}
+    <DeliveryInfo/>
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import BgImage from '../components/BgImage';
+import DeliveryInfo from '../components/DeliveryInfo';
 
 const Checkout = () => {
     
@@ -105,7 +106,7 @@ const Checkout = () => {
         </div>
 
         {/* Place Order Section*/}
-        <div className="max-w-[608px] w-full mx-auto py-[87px] px-2 sm:px-[37px] md:px-4 lg:px-[37px] bg-white rounded-lg">
+        <div className="max-w-[608px] w-full mx-auto py-[87px] px-2 sm:px-[37px] md:px-4 lg:px-[37px]">
 
           {/* Heading */}
           <div className="flex justify-between">
@@ -142,12 +143,12 @@ const Checkout = () => {
 
             <div className='flex items-center gap-2 text-[#9F9F9F] mt-6'>
               <Input type="radio" id="bank-transfer" name='payment-method' className="w-min" />
-              <Label htmlFor='bank-transfer' className='cursor-pointer'>Direct Bank Transfer</Label>
+              <Label htmlFor='bank-transfer' className='cursor-pointer text-lg'>Direct Bank Transfer</Label>
             </div>
 
             <div className='flex items-center gap-2 text-[#9F9F9F] mt-5'>
               <Input type="radio" id="cod" name='payment-method' className="w-min" />
-              <Label htmlFor='cod' className='cursor-pointer'>Cash On Delivery</Label>
+              <Label htmlFor='cod' className='cursor-pointer text-lg'>Cash On Delivery</Label>
             </div>
 
             <p className="font-light mt-5 text-justify">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <span className='font-bold'>privacy policy</span>.</p>
@@ -163,6 +164,9 @@ const Checkout = () => {
         </div>
 
       </div>
+
+      {/* Delivery Info*/}
+      <DeliveryInfo/>
     </div>
   )
 }

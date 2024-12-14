@@ -1,102 +1,89 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import DeliveryInfo from "../components/DeliveryInfo";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
+import Image from "next/image";
+
+const cart = [
+   {image: "/assets/products/14.webp" , productName : "Asgaard Sofa", price: 250000 , quantity: 2},
+   {image: "/assets/products/6.webp" , productName : "Kent Coffee table", price: 225000 , quantity: 1},
+   {image: "/assets/products/14.webp" , productName : "Asgaard Sofa", price: 250000 , quantity: 3},
+]
 
 const CartPage = () => {
   return (
-    <div className="max-w-[1440px] mx-auto font-Poppins">
-      <div className="max-w-[1240px] mx-auto flex gap-2 lg:flex-row flex-col p-3 md:p-0">
+    <div className="max-w-[1440px] mx-auto font-Poppins mt-16">
+      <div className="max-w-[1240px] mx-auto flex gap-7 flex-col lg:flex-row items-center lg:items-start p-3 md:p-0">
         {/* Product Table */}
-        <div className="flex flex-wrap">
-          <table className="w-full border border-[#F5F5DC] text-left">
-            <thead className="bg-[#FDF3DC] text-[#9F9F9F] uppercase">
-              <tr className="flex flex-wrap sm:flex-nowrap">
-                <th className="py-4 px-6">Product</th>
-                <th className="py-4 px-6">Price</th>
-                <th className="py-4 px-6">Quantity</th>
-                <th className="py-4 px-6">Subtotal</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr className="border-t border-[#F5F5DC] flex flex-wrap">
-                <td className="py-6 px-6">
-                  <div className="flex items-center gap-4">
-                    <img
-                      src="/assets/products/14.webp"
-                      alt="Asgaard Sofa"
-                      className="w-[70px] h-[70px] rounded-lg bg-[#FDF3DC]"
-                    />
-                    <span>Asgaard Sofa</span>
-                  </div>
-                </td>
-                <td className="py-6 px-6">Rs. 250,000.00</td>
-                <td className="py-6 px-6">
-                  <div className="flex items-center border border-[#00000080] rounded-md">
-                    <Button
-                      variant="ghost"
-                      className="w-8 flex items-center justify-center py-2 hover:bg-[#FBEBB5]"
-                    >
-                      -
-                    </Button>
-                    <Input
-                      type="number"
-                      value="1"
-                      readOnly
-                      className="w-12 text-center border-none focus:ring-0"
-                    />
-                    <Button
-                      variant="ghost"
-                      className="w-8 flex items-center justify-center py-2 hover:bg-[#FBEBB5]"
-                    >
-                      +
-                    </Button>
-                  </div>
-                </td>
-                <td className="py-6 px-6">Rs. 250,000.00</td>
-              </tr>
-            </tbody>
-          </table>
+        <div className="max-w-[817px] w-full overflow-x-auto">
+          <Table>
+            <TableHeader className="text-lg font-medium bg-[#FFF9E5]">
+              <TableRow className="py-10">
+                <TableHead className="text-center py-4">Product</TableHead>
+                <TableHead className="py-4">Price</TableHead>
+                <TableHead className="py-4">Quantity</TableHead>
+                <TableHead className="py-4">Subtotal</TableHead>
+                <TableHead className="py-4"></TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {cart.map((c, i) => (
+                <TableRow className="mt-14" key={i}>
+                  <TableCell className="flex flex-wrap items-center gap-2 sm:gap-9 text-[#9F9F9F]">
+                    <Image src={c.image} alt={c.productName} width={70} height={70} className="rounded-[10px] w-[70px] h-[70px] bg-[#FDF3DC]"></Image>
+                    <p>{c.productName}</p>
+                  </TableCell>
+                  <TableCell className="text-[#9F9F9F]">Rs. {c.price}.00</TableCell>
+                  <TableCell>
+                    <div className="flex">
+
+                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#FBEBB5] hover:text-black  cursor-pointer">-</Button>
+
+                      <Input type="number" value={c.quantity} readOnly className="w-12 border-none ml-2 " />
+
+                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#FBEBB5] hover:text-black  cursor-pointer">+</Button>
+                    </div>
+                  </TableCell>
+                  <TableCell>Rs. {c.price*c.quantity}.00</TableCell>
+                  <TableCell><button><img src="/assets/others/delete.svg" alt="Delete Icon" /></button></TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+          
         </div>
 
         {/* Cart Totals */}
-        <div className="p-6 bg-[#FFF6E3] rounded-md">
-          <h2 className="text-2xl font-bold mb-6">Cart Totals</h2>
-          <div className="flex justify-between text-xl">
-            <span>Subtotal</span>
-            <span>Rs. 250,000.00</span>
+        <div className="max-w-[817px] lg:max-w-[393px] w-full bg-[#FFF9E5] rounded-[4px] px-8 sm:px-[75px]">
+          <h2 className="text-[32px] font-bold mt-4 text-center">Cart Totals</h2>
+          <div className="flex justify-between mt-14">
+            <span className="font-medium">Subtotal</span>
+            <span className="#9F9F9F">Rs. 250,000.00</span>
           </div>
-          <div className="flex justify-between text-xl mt-4">
-            <span>Total</span>
-            <span className="font-bold text-[#F29100]">Rs. 250,000.00</span>
+          <div className="flex justify-between mt-8">
+            <span className="font-medium">Total</span>
+            <span className="text-xl font-medium text-[#B88E2F]">Rs. 250,000.00</span>
           </div>
-          <Button className="w-full mt-6 py-3 bg-black text-white rounded-md hover:bg-[#F29100]">
-            <Link href={"/checkout"}>Check Out</Link>
-          </Button>
+          <div className="flex justify-center">
+            <Button variant={"outline"} className="my-10 rounded-[10px] text-xl py-7 hover:bg-black hover:text-white duration-500 transition-colors w-[222px]">
+              <Link href={"/checkout"}>Check Out</Link>
+            </Button>
+          </div>
         </div>
     </div>
 
-        {/* Delivery Section*/}
-        <div className="mt-[92px] max-w-[1440px] mx-auto bg-[#FAF4F4] p-3 lg:p-0">
-          <div className="py-[96px] max-w-[1240px] mx-auto flex flex-col md:flex-row text-center md:text-start gap-4">
-            {/* Free Delivery */}
-            <div>
-              <h4 className="text-[32px] font-medium">Free Delivery</h4>
-              <p className="text-xl text-[#9F9F9F]">For all oders over $50, consectetur adipim scing elit.</p>
-            </div>
-
-            {/* 90 Days Return */}
-            <div>
-              <h4 className="text-[32px] font-medium">90 Days Return</h4>
-              <p className="text-xl text-[#9F9F9F]">If goods have problems, consectetur adipim scing elit.</p>
-            </div>
-
-            {/* Secure Payment */}
-            <div>
-              <h4 className="text-[32px] font-medium">Secure Payment</h4>
-              <p className="text-xl text-[#9F9F9F]">100% secure payment, consectetur adipim scing elit.</p>
-            </div>
-          </div>
-        </div>
+      {/* Delivery Info*/}
+      <DeliveryInfo/>
     </div>
   );
 };

@@ -3,27 +3,37 @@ import ProductCard from "../components/ProductCard";
 import Link from "next/link";
 import BgImage from "../components/BgImage";
 import DeliveryInfo from "../components/DeliveryInfo";
+import { client } from "@/sanity/lib/client";
+import { urlFor } from "@/sanity/lib/image";
 
-const Shop = () => {
+const Shop = async () => {
 
-    const productDetail = [
-        {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/5.webp" , name: "Grain coffee table", price: "Rs. 15,000.00"},
-        {imagePath: "/assets/products/6.webp" , name: "Kent coffee table", price: "Rs. 225,000.00"},
-        {imagePath: "/assets/products/7.webp" , name: "Round coffee table_color 2", price: "Rs. 251,000.00"},
-        {imagePath: "/assets/products/8.webp" , name: "Reclaimed teak coffee table", price: "Rs. 25,200.00"},
-        {imagePath: "/assets/products/9.webp" , name: "Plain console_", price: "Rs. 258,200.00"},
-        {imagePath: "/assets/products/10.webp" , name: "Reclaimed teak Sideboard", price: "Rs. 20,000.00"},
-        {imagePath: "/assets/products/11.webp" , name: "SJP_0825", price: "Rs. 200,000.00"},
-        {imagePath: "/assets/products/122.webp" , name: "Bella chair and table", price: "Rs. 100,000.00"},
-        {imagePath: "/assets/products/13.webp" , name: "Granite square side table", price: "Rs. 100,000.00"},
-        {imagePath: "/assets/products/14.webp" , name: "Asgaard sofa", price: "Rs. 250,000.00"},
-        {imagePath: "/assets/products/15.webp" , name: "Maya sofa three seater", price: "Rs. 115,000.00"},
-        {imagePath: "/assets/products/16.webp" , name: "Outdoor sofa set", price: "Rs. 244,000.00"},
-    ]
+    const products = await client.fetch(`*[_type == "product"]{
+        productTitle,
+        price,
+        images,
+        _id
+    }`,{}, {cache: "no-store"});
+    console.log(products)
+
+    // const productDetail = [
+    //     {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/5.webp" , name: "Grain coffee table", price: "Rs. 15,000.00"},
+    //     {imagePath: "/assets/products/6.webp" , name: "Kent coffee table", price: "Rs. 225,000.00"},
+    //     {imagePath: "/assets/products/7.webp" , name: "Round coffee table_color 2", price: "Rs. 251,000.00"},
+    //     {imagePath: "/assets/products/8.webp" , name: "Reclaimed teak coffee table", price: "Rs. 25,200.00"},
+    //     {imagePath: "/assets/products/9.webp" , name: "Plain console_", price: "Rs. 258,200.00"},
+    //     {imagePath: "/assets/products/10.webp" , name: "Reclaimed teak Sideboard", price: "Rs. 20,000.00"},
+    //     {imagePath: "/assets/products/11.webp" , name: "SJP_0825", price: "Rs. 200,000.00"},
+    //     {imagePath: "/assets/products/122.webp" , name: "Bella chair and table", price: "Rs. 100,000.00"},
+    //     {imagePath: "/assets/products/13.webp" , name: "Granite square side table", price: "Rs. 100,000.00"},
+    //     {imagePath: "/assets/products/14.webp" , name: "Asgaard sofa", price: "Rs. 250,000.00"},
+    //     {imagePath: "/assets/products/15.webp" , name: "Maya sofa three seater", price: "Rs. 115,000.00"},
+    //     {imagePath: "/assets/products/16.webp" , name: "Outdoor sofa set", price: "Rs. 244,000.00"},
+    // ]
 
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
@@ -38,11 +48,15 @@ const Shop = () => {
 
         {/* Products */}
         <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {productDetail.map((item, i) => {
-                return (<>
-                <Link href="/productdetail"><ProductCard key={i} name={item.name} price={item.price} imagePath={item.imagePath} /></Link>
-                </>)
-            })}
+            {products.map((product :any)=>(
+                <ProductCard 
+                key={product._id}
+                name={product.productTitle}
+                price={product.price}
+                imagePath={product.images[0]}
+                link={product._id}
+                />
+            ))}
         </div>
 
         {/* Page Number Section */}
@@ -53,8 +67,8 @@ const Shop = () => {
             <button className="bg-[#FFF9E5] hover:bg-[#FBEBB5] text-xl px-7 py-[15px] rounded-[10px] duration-300 transition-colors">Next</button>
         </div>
 
-    {/* Delivery Info*/}
-    <DeliveryInfo/>
+        {/* Delivery Info*/}
+        <DeliveryInfo/>
     </div>
   )
 }

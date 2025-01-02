@@ -1,10 +1,30 @@
-"use client"
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
-import { useState } from 'react';
-import ProductCard from '../components/ProductCard';
+import ProductCard from '@/app/components/ProductCard';
+import { client } from '@/sanity/lib/client';
+import ProductImages from '@/app/components/ImageSelector';
 
-const ProductDetail = () => {
+const ProductDetail = async ({params}: {params: {id: string}}) => {
+    const {id} = params
+    const productInfo = await client.fetch(`*[_type == "product" && _id == $id][0] {
+        productTitle,
+        price,
+        images,
+        _id,
+        inventory
+    }`,{id}, {cache: "no-store"});
+
+    const allProducts = await client.fetch(`
+        *[_type == "product"] {
+            productTitle,
+            price,
+            images,
+            _id,
+        }
+    `, {}, {cache: "no-store"});
+    const randomProducts = allProducts
+    .sort(() => Math.random() - 0.5)  // Randomize the order
+    .slice(0, 4);
 
     const productDetail = [
         {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
@@ -13,18 +33,15 @@ const ProductDetail = () => {
         {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
     ]
 
-    const [active,setActive] = useState(0)
-
     const images = [
-        "/assets/product-detail/1.png",
-        "/assets/product-detail/2.png",
-        "/assets/product-detail/3.png",
-        "/assets/product-detail/4.png",
+        productInfo.images[0],
+        productInfo.images[1],
+        productInfo.images[2],
+        productInfo.images[3],
     ];
 
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
-
         {/* Top Section */}
         <div className="max-w-[1240px] mx-auto py-[38px] flex px-2 xl:px-0">
             <p className="text-[#9F9F9F]">Home</p>
@@ -40,23 +57,7 @@ const ProductDetail = () => {
 
             {/* Image Section */}
             <div className='w-full md:w-[55%] xl:w-1/2 flex flex-col-reverse lg:flex-row gap-[31px]'>
-                {/* Four Image */}
-                <div className='flex flex-row lg:flex-col justify-between gap-2 lg:gap-8'>
-                    {images.map((key, i) => (
-                        <div
-                            key={i}
-                            className={`w-[100px] sm:h-[100px] bg-[#FBEBB5] flex p-[2px] justify-center items-center rounded ${active === i ? "border-2 border-black" : ""} `}
-                            onClick={() => { setActive(i); } }>
-                            <Image src={key} alt='Product Image' width={120} height={120} className='object-contain'></Image>
-                        </div>
-                    ))}
-
-                </div>
-
-                {/* Full Image */}
-                <div className='bg-[#FBEBB5] max-w-[750px] w-full h-[280px] xs:h-[400px] lg:h-auto flex justify-center items-center rounded-xl'>
-                    <Image src={images[active]} width={450} height={320} alt='Product Image' className=''/>
-                </div>
+                <ProductImages images={images}/>
             </div>
 
             {/* Product Details */}
@@ -64,10 +65,10 @@ const ProductDetail = () => {
                 <div className='flex flex-col'>
 
                     {/* Product Name */}
-                    <h3 className={`text-[42px] tracking-wide text-center md:text-start`}>Asgaard sofa</h3>
+                    <h3 className={`text-[42px] tracking-wide text-center md:text-start`}>{productInfo.productTitle}</h3>
 
                     {/* Price */}
-                    <p className={`text-2xl font-medium text-center md:text-start`}>Rs. 250,000.00</p>
+                    <p className={`text-2xl font-medium text-center md:text-start`}>Rs  {productInfo.price}.00</p>
 
                     {/* Rating & Reviews */}
                     <div className='flex items-center mt-[15px]'>
@@ -180,8 +181,8 @@ const ProductDetail = () => {
         <div>
             <p className='text-4xl font-medium mt-[26px] text-center'>Related Products</p>
             <div className='flex flex-wrap justify-center gap-[30px]'>
-                {productDetail.map((item, i) => {
-                    return( <ProductCard link='' key={i} name={item.name} price={item.price} imagePath={item.imagePath}/>)
+                {randomProducts.map((product:any, i:number) => {
+                    return( <ProductCard key={i} link={`/shop/${product._id}`} name={product.productTitle} price={product.price} imagePath={product.images[0]}/>)
                 })}
             </div>
 

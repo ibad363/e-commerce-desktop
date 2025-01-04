@@ -14,7 +14,6 @@ const Shop = async () => {
         images,
         _id
     }`,{}, {cache: "no-store"});
-    console.log(products)
 
     // const productDetail = [
     //     {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},

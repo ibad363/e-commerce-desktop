@@ -1,3 +1,4 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
@@ -13,6 +14,8 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Image from "next/image";
+import { useCart } from "../context/CartContext";
+import { urlFor } from "@/sanity/lib/image";
 
 const cart = [
    {image: "/assets/products/14.webp" , productName : "Asgaard Sofa", price: 250000 , quantity: 2},
@@ -21,6 +24,12 @@ const cart = [
 ]
 
 const CartPage = () => {
+  const { cartItems, removeFromCart, updateQuantity } = useCart();
+
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
+  };
+  
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins mt-16">
       <div className="max-w-[1240px] mx-auto flex gap-7 flex-col lg:flex-row items-center lg:items-start p-3 md:p-0">
@@ -37,25 +46,33 @@ const CartPage = () => {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {cart.map((c, i) => (
-                <TableRow className="mt-14" key={i}>
+              {cartItems.map((item) => (
+                <TableRow className="mt-14" key={item._id}>
                   <TableCell className="flex flex-wrap items-center gap-2 sm:gap-9 text-[#9F9F9F]">
-                    <Image src={c.image} alt={c.productName} width={70} height={70} className="rounded-[10px] w-[70px] h-[70px] bg-[#FDF3DC]"></Image>
-                    <p>{c.productName}</p>
+                    <Image src={urlFor(item.images[0]).url()} alt={item.productTitle} width={70} height={70} className="rounded-[10px] w-[70px] h-[70px] bg-[#FDF3DC]"></Image>
+                    <p>{item.productTitle}</p>
                   </TableCell>
-                  <TableCell className="text-[#9F9F9F]">Rs. {c.price}.00</TableCell>
+                  <TableCell className="text-[#9F9F9F]">Rs. {item.price}.00</TableCell>
                   <TableCell>
                     <div className="flex">
 
-                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#FBEBB5] hover:text-black  cursor-pointer">-</Button>
+                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#FBEBB5] hover:text-black  cursor-pointer"
+                      onClick={() => updateQuantity(item._id, Math.max(0, item.quantity - 1))}
+                      >-</Button>
 
-                      <Input type="number" value={c.quantity} readOnly className="w-12 border-none ml-2 " />
+                      <Input type="number" value={item.quantity} readOnly className="w-12 border-none ml-2 " />
 
-                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#FBEBB5] hover:text-black  cursor-pointer">+</Button>
+                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#FBEBB5] hover:text-black  cursor-pointer"
+                      onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                      >+</Button>
                     </div>
                   </TableCell>
-                  <TableCell>Rs. {c.price*c.quantity}.00</TableCell>
-                  <TableCell><button><img src="/assets/others/delete.svg" alt="Delete Icon" /></button></TableCell>
+                  <TableCell>Rs. {Number(item.price) * item.quantity}</TableCell>
+                  <TableCell>
+                    <button onClick={() => removeFromCart(item._id)}>
+                      <img src="/assets/others/delete.svg" alt="Delete Icon" />
+                    </button>
+                    </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -68,11 +85,11 @@ const CartPage = () => {
           <h2 className="text-[32px] font-bold mt-4 text-center">Cart Totals</h2>
           <div className="flex justify-between mt-14">
             <span className="font-medium">Subtotal</span>
-            <span className="#9F9F9F">Rs. 250,000.00</span>
+            <span className="#9F9F9F">Rs. {calculateTotal()}.00</span>
           </div>
           <div className="flex justify-between mt-8">
             <span className="font-medium">Total</span>
-            <span className="text-xl font-medium text-[#B88E2F]">Rs. 250,000.00</span>
+            <span className="text-xl font-medium text-[#B88E2F]">Rs. {calculateTotal()}.00</span>
           </div>
           <div className="flex justify-center">
             <Button variant={"outline"} className="my-10 rounded-[10px] text-xl py-7 hover:bg-black hover:text-white duration-500 transition-colors w-[222px]">

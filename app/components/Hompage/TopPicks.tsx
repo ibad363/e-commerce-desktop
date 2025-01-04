@@ -1,12 +1,20 @@
+import { client } from "@/sanity/lib/client";
 import ProductCard from "../ProductCard"
 
-const TopPicks = () => {
-    const productDetail = [
-        {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
-    ]
+const TopPicks = async () => {
+    const products = await client.fetch(`*[_type == "product"]{
+        productTitle,
+        price,
+        images,
+        _id
+    }[0...4]`,{}, {cache: "no-store"});
+
+    // const productDetail = [
+    //     {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
+    //     {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
+    // ]
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins font-medium">
         {/* Tables */}
@@ -42,9 +50,15 @@ const TopPicks = () => {
 
         {/* Products */}
         <div className="mt-[65px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {productDetail.map((item, i) => {
-                return( <ProductCard key={i} name={item.name} price={item.price} imagePath={item.imagePath}/>)
-            })}
+        {products.map((product :any)=>(
+                <ProductCard 
+                key={product._id}
+                name={product.productTitle}
+                price={product.price}
+                imagePath={product.images[0]}
+                link={product._id}
+                />
+            ))}
         </div>
 
         {/* View More Button*/}

@@ -11,11 +11,20 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
+import { useCart } from "../context/CartContext"; // Cart context import karen
+import { urlFor } from "@/sanity/lib/image";
 
 const Header = () => {
-
   const [isNavbarOpen, setIsNavbarOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
+
+    // Cart context se functions aur data get karen
+    const { cartItems, removeFromCart } = useCart();
+
+    // Cart ka total calculate karne ke liye
+    const calculateSubtotal = () => {
+      return cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
+    };
 
   return (
     <header className="w-full mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20 shadow-xl">
@@ -85,23 +94,35 @@ const Header = () => {
             <SheetDescription>
               <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
 
-              <div className='flex gap-4 items-center mt-[42px]'>
-                <div className='w-[120px] h-[100px]'>
-                  <Image src={"/assets/products/14.webp"} width={121} height={114} alt='Product Image' className='w-full bg-[#FFF9E5] flex p-3 justify-center items-center rounded' />
-                </div>
-                <div className='flex flex-col items-center justify-center'>
-                  <p>Asgaard sofa</p>
-                  <div>
-                    1 X <span className='ml-[2px] text-[#B88E2F]'>Rs. 250,000.00</span>
+              {cartItems.map((item) => (
+                <div key={item._id} className='flex gap-4 items-center mt-[42px]'>
+                  <div className='w-[120px] h-[100px]'>
+                    <Image
+                      src={urlFor(item.images[0]).url()}
+                      width={121}
+                      height={114}
+                      alt={item.productTitle}
+                      className='w-full bg-[#FFF9E5] flex p-3 justify-center items-center rounded'
+                    />
                   </div>
+                  <div className='flex flex-col items-center justify-center'>
+                    <p>{item.productTitle}</p>
+                    <div>
+                      {item.quantity} X <span className='ml-[2px] text-[#B88E2F]'>Rs. {item.price}.00</span>
+                    </div>
+                  </div>
+                  <button onClick={() => removeFromCart(item._id)}>
+                    <img src="/assets/product-detail/discard.svg" alt="Remove item" />
+                  </button>
                 </div>
-                <div><img src="/assets/product-detail/discard.svg" alt="" /></div>
-              </div>
+              ))}
 
+              {/* Cart Summary */}
               <div className='flex justify-between mt-16'>
                 <p>Subtotal</p>
-                <p className='text-[#B88E2F] font-semibold'>Rs. 250,000.00</p>
+                <p className='text-[#B88E2F] font-semibold'>Rs. {calculateSubtotal()}.00</p>
               </div>
+
 
               <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
 

@@ -178,17 +178,17 @@ const ProductDetail = () => {
 
         {/* Related Products */}
         <div>
-            <p className='text-4xl font-medium mt-[26px] text-center'>Related Products</p>
+            {/* <p className='text-4xl font-medium mt-[26px] text-center'>Related Products</p>
             <div className='flex flex-wrap justify-center gap-[30px]'>
                 {productDetail.map((item, i) => {
                     return( <ProductCard link='' key={i} name={item.name} price={item.price} imagePath={item.imagePath}/>)
                 })}
-            </div>
+            </div> */}
 
             {/* View More Button*/}
-            <div className="flex justify-center mt-[93px] mb-[103px]">
+            {/* <div className="flex justify-center mt-[93px] mb-[103px]">
                 <button className="w-[84px] hover:border-b border-black">View More</button>
-            </div>
+            </div> */}
         </div>
     </div>
 )}

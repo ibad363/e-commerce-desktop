@@ -1,20 +1,29 @@
+"use client"
+
 import { client } from "@/sanity/lib/client";
 import ProductCard from "../ProductCard"
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const TopPicks = async () => {
-    const products = await client.fetch(`*[_type == "product"]{
-        productTitle,
-        price,
-        images,
-        _id
-    }[0...4]`,{}, {cache: "no-store"});
+const TopPicks = () => {
+    const [products, setProducts] = useState<any[]>([]);
 
-    // const productDetail = [
-    //     {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
-    //     {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
-    //     {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
-    //     {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
-    // ]
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const data = await client.fetch(
+                `*[_type == "product"]{
+                    productTitle,
+                    price,
+                    images,
+                    _id
+                }[0...4]`
+            );
+            setProducts(data);
+        };
+
+        fetchProducts();
+    }, []);
+
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins font-medium">
         {/* Tables */}
@@ -24,7 +33,7 @@ const TopPicks = async () => {
                 <img src="/assets/homepage/top-picks/1.png" alt="Table" className="  absolute right-4 top-2"/>
                 <div className="relative">
                     <h4 className="text-4xl">Side table</h4>
-                    <button className="text-2xl font-medium hover:border-b hover:border-black w-[124px] mt-4">View More</button>
+                    <Link href={"/shop/2c91c390-4ec6-4c0d-a1d5-083f834cd0c9"}><button className="text-2xl font-medium hover:border-b hover:border-black w-[124px] mt-4">View More</button></Link>
                 </div>
             </div>
             {/* 2nd Table */}
@@ -32,7 +41,7 @@ const TopPicks = async () => {
                 <img src="/assets/homepage/top-picks/2.png" alt="Table" className="  absolute right-4 top-2"/>
                 <div className="relative">
                     <h4 className="text-4xl">Side table</h4>
-                    <button className="text-2xl font-medium hover:border-b hover:border-black w-[124px] mt-4">View More</button>
+                    <Link href={"/shop/8bebc7ab-9cfa-4d83-9629-e75b1bf343c8"}><button className="text-2xl font-medium hover:border-b hover:border-black w-[124px] mt-4">View More</button></Link>
                 </div>
             </div>
 

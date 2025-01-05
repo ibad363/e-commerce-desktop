@@ -13,7 +13,7 @@ const ProductCard = ({name,price,imagePath,link}: {name: string, price: string ,
       _id: link,
       productTitle: name,
       price: price,
-      images: [imagePath],
+      image: imagePath,
       quantity: 1
     });
   }

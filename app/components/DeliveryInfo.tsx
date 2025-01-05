@@ -1,6 +1,6 @@
 const DeliveryInfo = () => {
   return (
-    <div className="mt-[67px] max-w-[1440px] mx-auto bg-[#FAF4F4] p-3 lg:p-0">
+    <div className="mt-[67px] max-w-[1440px] mx-auto bg-[#fbebb5] p-3 lg:p-0">
       <div className="py-[96px] max-w-[1240px] mx-auto flex flex-col md:flex-row text-center md:text-start gap-4">
         {/* Free Delivery */}
         <div>

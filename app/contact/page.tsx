@@ -8,7 +8,7 @@ import DeliveryInfo from "../components/DeliveryInfo";
 
 const Contact = () => {
   return (
-    <div className="max-w-1440px mx-auto font-Poppins ">
+    <div className="max-w-[1440px] mx-auto font-Poppin ">
       {/* Background Image */}
       <BgImage pageName="Contact"/>
 

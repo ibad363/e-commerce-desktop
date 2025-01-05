@@ -4,11 +4,12 @@ import Instagram from "./Instagram"
 import NewArrival from "./NewArrival"
 import TopPicks from "./TopPicks"
 
+
 const Homepage = () => {
   return (
     <>
     <Hero/>
-    {/* <TopPicks/> */}
+    <TopPicks/>
     <NewArrival/>
     <Blog/>
     <Instagram/>

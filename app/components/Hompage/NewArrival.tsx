@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from "next/link"
 
 const NewArrival = () => {
   return (
@@ -12,7 +13,9 @@ const NewArrival = () => {
         <div className="flex flex-col items-center justify-center">
             <h5 className="text-2xl font-medium">New Arrivals</h5>
             <h2 className="text-5xl font-bold text-center">Asgaard sofa</h2>
-            <button className="border-black border text-xl px-10 xl:px-[74px] py-[17px] mt-8 hover:text-white hover:border-none hover:bg-black">Order Now</button>
+            <Link href={"/shop/6556d784-2d1e-438e-b9a6-9e3a13f031e4"}>
+              <button className="border-black border text-xl px-10 xl:px-[74px] py-[17px] mt-8 hover:text-white hover:border-none hover:bg-black">Order Now</button>
+            </Link>
         </div>
     </div>
   )

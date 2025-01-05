@@ -3,6 +3,7 @@ import Image from 'next/image';
 import ProductCard from '@/app/components/ProductCard';
 import { client } from '@/sanity/lib/client';
 import ProductImages from '@/app/components/ImageSelector';
+import Link from 'next/link';
 
 const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
@@ -188,7 +189,7 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
 
             {/* View More Button*/}
             <div className="flex justify-center mt-[93px] mb-[103px]">
-                <button className="w-[84px] hover:border-b border-black">View More</button>
+                <Link href={"/shop"}><button className="w-[84px] hover:border-b border-black">View More</button></Link>
             </div>
         </div>
     </div>

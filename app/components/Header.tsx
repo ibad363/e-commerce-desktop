@@ -11,17 +11,16 @@ import {
 } from "@/components/ui/sheet";
 import Link from "next/link";
 import Image from "next/image";
-import { useCart } from "../context/CartContext"; // Cart context import karen
+import { useCart } from "../context/CartContext";
 import { urlFor } from "@/sanity/lib/image";
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
 
-    // Cart context se functions aur data get karen
-    const { cartItems, removeFromCart } = useCart();
+    const { cartItems, removeFromCart, updateQuantity } = useCart();
 
-    // Cart ka total calculate karne ke liye
     const calculateSubtotal = () => {
       return cartItems.reduce((total, item) => total + (Number(item.price) * item.quantity), 0);
     };
@@ -88,50 +87,69 @@ const Header = () => {
 
       {/* Cart */}
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetContent className="w-[300px] sm:w-[540px] bg-white h-[746px]">
+        <SheetContent className="w-[300px] sm:w-[540px] bg-white h-[100vh] flex flex-col">
           <SheetHeader>
             <SheetTitle className='text-2xl font-semibold'>Shopping Cart</SheetTitle>
-            <SheetDescription>
               <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
+          </SheetHeader>
 
-              {cartItems.map((item) => (
-                <div key={item._id} className='flex gap-4 items-center mt-[42px]'>
-                  <div className='w-[120px] h-[100px]'>
-                    <Image
-                      src={urlFor(item.images[0]).url()}
-                      width={121}
-                      height={114}
-                      alt={item.productTitle}
-                      className='w-full bg-[#FFF9E5] flex p-3 justify-center items-center rounded'
-                    />
-                  </div>
-                  <div className='flex flex-col items-center justify-center'>
-                    <p>{item.productTitle}</p>
+              {/* Cart Items */}
+              <div className="flex flex-col flex-grow overflow-y-auto">
+                {cartItems.map((item) => (
+                  <div key={item._id} className='flex flex-col sm:flex-row sm:gap-4 items-center justify-start mt-[12px]'>
+                    {/* Image with delete button */}
+                    <div className='max-w-[100px] w-full relative'>
+                      <Image
+                        src={urlFor(item.image).url()}
+                        width={120}
+                        height={95}
+                        alt={item.productTitle}
+                        className='w-full h-full object-contain bg-[#fbebb5] flex p-1 justify-center items-center rounded'
+                      />
+                        <button onClick={() => removeFromCart(item._id)} className="-top-1 -right-2 absolute">
+                          <img src="/assets/product-detail/discard.svg" alt="Remove item" />
+                        </button>
+                    </div>
+
+                    {/* Details */}
+                    <div className='flex flex-col gap-1'>
+                      {/* Product Title */}
+                      <p>{item.productTitle}</p>
+                      {/* Quantity & Price */}
+                      <div>
+                        {item.quantity} X <span className='ml-[2px] text-[#B88E2F]'>Rs. {item.price}.00</span>
+                      </div>
+                    {/* Plus, Minus Button */}
                     <div>
-                      {item.quantity} X <span className='ml-[2px] text-[#B88E2F]'>Rs. {item.price}.00</span>
+                      <Button
+                        variant="ghost"
+                        className="rounded-[5px] text-black hover:bg-[#f0d786] hover:text-black cursor-pointer px-3"
+                        onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                      >+</Button>
+                      <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#f0d786] hover:text-black cursor-pointer px-3"
+                        onClick={() => updateQuantity(item._id, Math.max(0, item.quantity - 1)
+                      )}>-</Button>
+                    </div>
                     </div>
                   </div>
-                  <button onClick={() => removeFromCart(item._id)}>
-                    <img src="/assets/product-detail/discard.svg" alt="Remove item" />
-                  </button>
+                ))}
+              </div>
+
+              {/* Summary & Button */}
+              <div>
+                {/* Cart Summary */}
+                <div className='flex justify-between mt-16'>
+                  <p>Subtotal</p>
+                  <p className='text-[#B88E2F] font-semibold'>Rs. {calculateSubtotal()}.00</p>
                 </div>
-              ))}
+                <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
 
-              {/* Cart Summary */}
-              <div className='flex justify-between mt-16'>
-                <p>Subtotal</p>
-                <p className='text-[#B88E2F] font-semibold'>Rs. {calculateSubtotal()}.00</p>
+                {/* Buttons */}
+                <div className='mt-[26px] flex justify-between gap-3'>
+                  <button className='px-4 sm:px-[37px] py-3 border-black border rounded-[50px]'><Link href={"/cart"} className="hover:underline">View Cart</Link></button>
+                  <button className='px-4 sm:px-[37px] py-3 border-black border rounded-[50px]'><Link href={"/checkout"} className="hover:underline">Checkout</Link></button>
+                </div>
               </div>
-
-
-              <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
-
-              <div className='mt-[26px] flex gap-3'>
-                <button className='px-[37px] py-3 border-black border rounded-[50px]'><Link href={"/cart"}>View Cart</Link></button>
-                <button className='px-[37px] py-3 border-black border rounded-[50px]'><Link href={"/checkout"}>Checkout</Link></button>
-              </div>
-            </SheetDescription>
-          </SheetHeader>
         </SheetContent>
       </Sheet>
     </header>

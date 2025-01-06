@@ -4,6 +4,7 @@ import ProductCard from '@/app/components/ProductCard';
 import { client } from '@/sanity/lib/client';
 import ProductImages from '@/app/components/ImageSelector';
 import Link from 'next/link';
+import AddToCart from '@/app/components/AddToCart';
 
 const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
@@ -44,17 +45,17 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
         {/* Top Section */}
-        <div className="max-w-[1240px] mx-auto py-[38px] flex px-2 xl:px-0">
-            <p className="text-[#9F9F9F]">Home</p>
+        <div className="max-w-[1240px] mx-auto py-[38px] sm:flex items-center px-2 xl:px-0 hidden">
+            <Link href={"/"}><p className="text-[#9F9F9F] hover:underline">Home</p></Link>
             <ChevronRight className='mx-2 sm:ml-[14px] sm:mr-[24px]' />
-            <p className="text-[#9F9F9F]">Shop</p>
+            <Link href={"/shop"}><p className="text-[#9F9F9F] hover:underline">Shop</p></Link>
             <ChevronRight className='mx-2 sm:ml-[21px] sm:mr-[25px]' />
             <div className='w-[1px] h-[1px] bg-[#9F9F9F]'></div>
-            <p className='border-l border-[#9F9F9F] pl-5 sm:pl-[34px] hover:underline cursor-pointer'>Asgaard sofa</p>
+            <p className='border-l border-[#9F9F9F] pl-5 sm:pl-[34px]'>{productInfo.productTitle}</p>
         </div>
 
         {/* Images & Name Section */}
-        <div className='max-w-[1240px] mx-auto flex flex-col md:flex-row gap-[31px] items-start p-2 xl:p-0'>
+        <div className='max-w-[1240px] mx-auto flex flex-col md:flex-row gap-[31px] items-start p-2 xl:p-0 mt-8 sm:mt-0'>
 
             {/* Image Section */}
             <div className='w-full md:w-[55%] xl:w-1/2 flex flex-col-reverse lg:flex-row gap-[31px]'>
@@ -72,7 +73,7 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
                     <p className={`text-2xl font-medium text-center md:text-start`}>Rs  {productInfo.price}.00</p>
 
                     {/* Rating & Reviews */}
-                    <div className='flex items-center mt-[15px]'>
+                    <div className='flex justify-center md:justify-start items-center mt-[15px]'>
                         <div className='text-[#FFAD33] text-2xl mr-4'>★★★★<span className='text-black opacity-25'>★</span></div>
                         <p className='opacity-50 text-[14px] text-[#9F9F9F] font-normal mr-4 border-l-[#9F9F9F] border-l pl-4 text-center'>5 Customer Review</p>
 
@@ -103,17 +104,7 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
                 </div>
 
                 {/* add to cart */}
-                <div className='flex flex-col sm:flex-row flex-wrap items-center md:items-start gap-4 mt-[32px]'>
-                    <div className='w-[123px] rounded-[10px] border border-[#00000080] flex justify-between overflow-hidden'>
-                        <button className='w-[40px] flex items-center justify-center hover:text-black hover:bg-[#FBEBB5] py-5'>-</button>
-                        <p className='text-xl font-medium w-[80px] flex items-center justify-center '>2</p>
-                        <button className='w-[40px] flex items-center justify-center hover:text-black hover:bg-[#FBEBB5] py-5'>+</button>
-                    </div>
-
-                    <div className='flex justify-center'>
-                        <button className='border-[1px] border-black px-12 py-[17px] rounded-[10px] flex items-center justify-center hover:text-black hover:bg-[#FBEBB5] hover:border-0'>Add To Cart</button>
-                    </div>
-                </div>
+                <AddToCart product={productInfo} />
 
                 {/* Line */}
                 <div className='h-[1px] w-full bg-[#D9D9D9] mt-[60px]'></div>

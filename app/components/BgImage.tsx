@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const BgImage = (props:{pageName: string}) => {
   return (
@@ -21,7 +22,7 @@ const BgImage = (props:{pageName: string}) => {
         />
         <h1 className="text-4xl md:text-5xl font-medium">{props.pageName}</h1>
         <div className="flex items-center gap-4 mt-3">
-          <span className="font-medium">Home</span>
+          <Link href={"/"}><span className="font-medium hover:underline">Home</span></Link>
           <Image src="/assets/others/RightArrow.svg" alt="Right Arrow" width={10} height={10} />
           <span className="font-light">{props.pageName}</span>
         </div>

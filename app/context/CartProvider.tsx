@@ -12,14 +12,18 @@ const CartProvider = ({children}:{children : ReactNode}) => {
             const existingItem = currentCart.find(eachItem=> eachItem._id === product._id)
             
             if (existingItem) {
+                toast.info("Product Quantity Updated!",{
+                    autoClose : 1000,
+                })
                 return currentCart.map(eachItem => {
                     return eachItem._id === product._id
                     ? {...eachItem, quantity: eachItem.quantity + 1}
                     : eachItem
                 })
+                
             }
-
-            toast.success("Product Added to Cart!")
+            
+            toast.success("Product Added to Cart!")     
             return [...currentCart, {...product,quantity:1}]
         }
         )
@@ -35,7 +39,10 @@ const CartProvider = ({children}:{children : ReactNode}) => {
             currentCart.map(eachCartItems=> 
                 eachCartItems._id === productId 
                 ? {...eachCartItems, quantity: newQuantity}
-                : eachCartItems
+                : eachCartItems,
+                toast.info("Product Quantity Updated!",{
+                    autoClose : 1000,
+                })
             )
         )
     }

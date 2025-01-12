@@ -6,24 +6,30 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const TopPicks = () => {
-    const [products, setProducts] = useState<any[]>([]);
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(true)
 
-    useEffect(() => {
-        const fetchProducts = async () => {
-            const data = await client.fetch(
-                `*[_type == "product"]{
-                    productTitle,
-                    price,
-                    images,
-                    _id
-                }[0...4]`
-            );
-            setProducts(data);
-        };
-
-        fetchProducts();
-    }, []);
-
+    useEffect(()=>{
+        async function fetchProducts() {
+            try {
+                const data = await client.fetch(
+                    `*[_type == "product"]{
+                        productTitle,
+                        price,
+                        images,
+                        _id
+                    }[0...4]`, {}, { cache: "no-store" })
+                setProducts(data)
+            } catch (error) {
+                console.log("Error Fetching Top Picks Products", error)
+            }finally{
+                setLoading(false)
+            }
+        }
+            
+        fetchProducts()
+    },[])
+    
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins font-medium">
         {/* Tables */}
@@ -59,15 +65,19 @@ const TopPicks = () => {
 
         {/* Products */}
         <div className="mt-[65px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-        {products.map((product :any)=>(
-                <ProductCard 
-                key={product._id}
-                name={product.productTitle}
-                price={product.price}
-                imagePath={product.images[0]}
-                link={product._id}
-                />
-            ))}
+            {loading ? (
+                <p>Loading...</p>
+            ): (
+                products.map((product :any)=>(
+                    <ProductCard 
+                    key={product._id}
+                    name={product.productTitle}
+                    price={product.price}
+                    imagePath={product.images[0]}
+                    link={product._id}
+                    />
+                ))
+            )}
         </div>
 
         {/* View More Button*/}

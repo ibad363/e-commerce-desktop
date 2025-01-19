@@ -16,9 +16,11 @@ const TopPicks = () => {
                     `*[_type == "product"]{
                         productTitle,
                         price,
-                        images,
+                        "image": image.asset->url,
                         _id
                     }[0...4]`, {}, { cache: "no-store" })
+                console.log("products:",data)
+
                 setProducts(data)
             } catch (error) {
                 console.log("Error Fetching Top Picks Products", error)
@@ -73,7 +75,7 @@ const TopPicks = () => {
                     key={product._id}
                     name={product.productTitle}
                     price={product.price}
-                    imagePath={product.images[0]}
+                    imagePath={product.image}
                     link={product._id}
                     />
                 ))

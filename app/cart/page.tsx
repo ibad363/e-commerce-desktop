@@ -28,9 +28,7 @@ const CartPage = () => {
   };
 
   const GST = () => {
-    return cartItems.reduce((total, item) => 
-      total + (Number(calculateTotal()) * (10 / 100))
-    , 0);
+    return calculateTotal() * 10/100
   };
   
   return (

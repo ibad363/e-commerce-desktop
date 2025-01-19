@@ -8,13 +8,15 @@ import AddToCart from '@/app/components/AddToCart';
 
 const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
-    const productInfo = await client.fetch(`*[_type == "product" && _id == $id][0] {
-        productTitle,
+    const productInfo = await client.fetch(`*[_type == "product" && _id == $id][0]{
+        name,
+        rating,
+        description,
+        sizes,
+        tags,
         price,
-        images,
-        _id,
-        inventory
-    }`,{id}, {cache: "no-store"});
+        image
+        }`,{id}, {cache: "no-store"});
 
     const allProducts = await client.fetch(`
         *[_type == "product"] {
@@ -36,10 +38,10 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
     ]
 
     const images = [
-        productInfo.images[0],
-        productInfo.images[1],
-        productInfo.images[2],
-        productInfo.images[3],
+        productInfo.image,
+        productInfo.image,
+        productInfo.image,
+        productInfo.image,
     ];
 
     return (
@@ -67,21 +69,33 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
                 <div className='flex flex-col'>
 
                     {/* Product Name */}
-                    <h3 className={`text-[42px] tracking-wide text-center md:text-start`}>{productInfo.productTitle}</h3>
+                    <h3 className={`text-[42px] tracking-wide text-center md:text-start`}>{productInfo.name}</h3>
 
                     {/* Price */}
-                    <p className={`text-2xl font-medium text-center md:text-start`}>Rs  {productInfo.price}.00</p>
+                    <p className={`text-2xl font-medium text-center md:text-start`}>${productInfo.price}</p>
 
                     {/* Rating & Reviews */}
                     <div className='flex justify-center md:justify-start items-center mt-[15px]'>
                         <div className='text-[#FFAD33] text-2xl mr-4'>★★★★<span className='text-black opacity-25'>★</span></div>
-                        <p className='opacity-50 text-[14px] text-[#9F9F9F] font-normal mr-4 border-l-[#9F9F9F] border-l pl-4 text-center'>5 Customer Review</p>
+                        <p className='opacity-50 text-[14px] text-[#9F9F9F] font-normal mr-4 border-l-[#9F9F9F] border-l pl-4 text-center'>{productInfo.rating} Customer Rating</p>
 
                     </div>
                 </div>
 
                 {/* Product Description */}
-                <p className='text-[13px] mt-[18px] text-center md:text-start'>Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound.</p>
+                <p className='text-[13px] mt-[18px] text-center md:text-start'>{productInfo.description}</p>
+
+                {/* Tags */}
+                <div className='flex flex-col gap-3 mt-[18px] items-center md:items-start'>
+                    <p className='text-[14px] text-[#9F9F9F] tracking-wide'>Tags</p>
+                    <div className='flex items-center gap-4'>
+                        <p className='text-black text-[13px] capitalize flex flex-wrap gap-2'>
+                            {productInfo.tags.map((tag:any)=>(
+                                <span>#{tag}</span>
+                            ))}
+                        </p>
+                    </div>
+                </div>
 
                 {/* Size */}
                 <div className='flex flex-col items-center md:items-start gap-[12px] mt-[22px]'>
@@ -173,9 +187,9 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
         <div>
             <p className='text-4xl font-medium mt-[26px] text-center'>Related Products</p>
             <div className='flex flex-wrap justify-center gap-[30px]'>
-                {randomProducts.map((product:any, i:number) => {
+                {/* {randomProducts.map((product:any, i:number) => {
                     return( <ProductCard key={i} link={`/shop/${product._id}`} name={product.productTitle} price={product.price} imagePath={product.images[0]}/>)
-                })}
+                })} */}
             </div>
 
             {/* View More Button*/}

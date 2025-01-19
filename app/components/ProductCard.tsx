@@ -23,7 +23,8 @@ const ProductCard = ({name,price,imagePath,link}: {name: string, price: string ,
 
         {/* Image */}
         <div className="h-[240px] w-[287px] flex flex-col items-center justify-center relative group">
-            <Link href={`/shop/${link}`}><Image src={urlFor(imagePath).url()} alt="Product Image" width={220} height={220} className="object-center w-full h-full rounded-[5px]"></Image>
+            <Link href={`/shop/${link}`} className="h-[240px] w-[287px]">
+            {imagePath && <Image src={urlFor(imagePath).url()} alt="Product Image" width={220} height={220} className="object-center w-full h-full rounded-[5px]"></Image>}
             </Link>
             {/* add to cart */}
             <Button variant={"outline"} 
@@ -37,7 +38,7 @@ const ProductCard = ({name,price,imagePath,link}: {name: string, price: string ,
         {/* Product Detail */}
         <div className="flex flex-col p-2 mt-4">
           <h3 className="cursor-pointer font-normal"><Link href={`/shop/${link}`}>{name}</Link></h3>
-          <p className="text-2xl mt-4">Rs {price}.00
+          <p className="text-2xl mt-4">${price}
           </p>
         </div>
     </div>

@@ -1,11 +1,25 @@
+"use client"
 import { Button } from '@/components/ui/button'
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectTrigger, SelectContent, SelectItem, SelectValue } from "@/components/ui/select";
 import BgImage from '../components/BgImage';
 import DeliveryInfo from '../components/DeliveryInfo';
+import { useCart } from '../context/CartContext';
+import Link from 'next/link';
 
 const Checkout = () => {
+  let {cartItems} = useCart()
+
+  const calculateTotal = () => {
+    return cartItems.reduce((total, item) => 
+      total + (Number(item.price) * item.quantity)
+    , 0);
+  };
+
+  const GST = () => {
+    return calculateTotal() * 10/100
+  };
     
   return (
     <div className='max-w-[1440px] mx-auto font-Poppins'>
@@ -116,18 +130,24 @@ const Checkout = () => {
 
           {/* Product Details */}
           <div className="space-y-5 mt-[14px]">
-            <div className='flex justify-between'>
-              <p className="text-[#9F9F9F]">Asgaard sofa <span className='text-black'> X 1</span></p>
-              <span className="font-light">Rs. 250,000.00</span>
-            </div>
+            {cartItems.map((item =>
+              <div className='flex justify-between'>
+                <p className="text-[#9F9F9F]">{item.productTitle} <span className='text-black mx-2'>X</span>{item.quantity}</p>
+                <span className="font-light">$ {Number(item.price) * item.quantity}</span>
+              </div>
+            ))}
          
             <div className="flex justify-between">
               <p>Subtotal</p>
-              <span className="font-light">Rs. 250,000.00</span>
+              <span className="font-light">$ {calculateTotal()}</span>
+            </div>
+            <div className="flex justify-between">
+              <p>GST (10%)</p>
+              <span className="font-light">$ {GST()}</span>
             </div>
             <div className="flex justify-between">
               <p>Total</p>
-              <span className="text-2xl text-[#B88E2F] font-bold">Rs. 250,000.00</span>
+              <span className="text-2xl text-[#B88E2F] font-bold">$ {calculateTotal() + GST()}</span>
             </div>
           </div>
           <hr className='mt-10'/>
@@ -154,12 +174,13 @@ const Checkout = () => {
             <p className="font-light mt-5 text-justify">Your personal data will be used to support your experience throughout this website, to manage access to your account, and for other purposes described in our <span className='font-bold'>privacy policy</span>.</p>
           </div>
 
-          {/* <!-- Place Order Button --> */}
+          {/*  Place Order Button */}
           <div className='flex justify-center items-center mt-10'>
-            <Button
-              className="w-[318px] h-[64px] border border-[#000000] font-semibold rounded-[15px]">
-              Place order
-            </Button>
+            <Link
+            href={"/checkout/shipping"}
+              className="px-14 py-4 border border-[#000000] font-semibold rounded-[15px]">
+              Checkout
+            </Link>
           </div>
         </div>
 

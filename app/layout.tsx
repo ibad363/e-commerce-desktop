@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import CartProvider from "./context/CartProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
+import { SanityLive } from "@/sanity/lib/live";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default function RootLayout({
           {children}
           <Footer />
         </CartProvider>
+        <SanityLive/>
       </body>
     </html>
   );

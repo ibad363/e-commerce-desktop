@@ -117,7 +117,7 @@ const Header = () => {
                       <p>{item.productTitle}</p>
                       {/* Quantity & Price */}
                       <div>
-                        {item.quantity} X <span className='ml-[2px] text-[#B88E2F]'>Rs. {item.price}.00</span>
+                        {item.quantity} X <span className='ml-[2px] text-[#B88E2F]'>${item.price}</span>
                       </div>
                     {/* Plus, Minus Button */}
                     <div>

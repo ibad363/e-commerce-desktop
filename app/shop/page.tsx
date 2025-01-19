@@ -6,10 +6,14 @@ import { client } from "@/sanity/lib/client";
 const Shop = async () => {
 
     const products = await client.fetch(`*[_type == "product"]{
-        productTitle,
+        name,
+        _id,
+        tags,
+        sizes,
         price,
-        images,
-        _id
+        description,
+        image,
+        rating
     }`,{}, {cache: "no-store"});
 
     return (
@@ -25,15 +29,15 @@ const Shop = async () => {
 
         {/* Products */}
         <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {products.map((product :any)=>(
+            {products && (products.map((product :any)=>(
                 <ProductCard 
                 key={product._id}
-                name={product.productTitle}
+                name={product.name}
                 price={product.price}
-                imagePath={product.images[0]}
+                imagePath={product.image}   
                 link={product._id}
                 />
-            ))}
+            )))}
         </div>
 
         {/* Page Number Section */}

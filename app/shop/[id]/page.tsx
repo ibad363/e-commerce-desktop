@@ -11,23 +11,7 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
     const productInfo = await getProductById(id)
     const FeaturedProducts:any = await getFeaturedProduct()
-    
-    // const allProducts = await client.fetch(`
-    //     *[_type == "product"] {
-    //         productTitle,
-    //         price,
-    //         images,
-    //         _id,
-    //     }
-    // `, {}, {cache: "no-store"});
-
-
-    // const randomProducts = allProducts
-    // .sort(() => Math.random() - 0.5)  // Randomize the order
-    // .slice(0, 4);
-
-    // 4 images
-    
+      
     const images = [
         productInfo?.imageUrl,
         productInfo?.imageUrl,

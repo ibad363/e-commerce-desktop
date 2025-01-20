@@ -9,7 +9,7 @@ const Homepage = () => {
   return (
     <>
     <Hero/>
-    <TopPicks/>
+    {/* <TopPicks/> */}
     <NewArrival/>
     <Blog/>
     <Instagram/>

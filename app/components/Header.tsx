@@ -53,7 +53,6 @@ const Header = () => {
         <div className="flex items-center gap-8">
           <Link href={"/account"}><UserCheck className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
           <SearchCommand/>
-          {/* <Link href={"/"}><Search className="hover:bg-[#f0d786] p-[6px] rounded" size={37} /></Link> */}
           <Link href={"/"}><Heart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
           <button onClick={()=> setIsCartOpen(true)}><ShoppingCart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></button>
           <Menu className="sm:hidden cursor-pointer" onClick={()=> setIsNavbarOpen(true)} size={25}/>

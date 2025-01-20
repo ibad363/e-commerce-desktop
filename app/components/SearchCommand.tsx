@@ -98,7 +98,7 @@ export function SearchCommand() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-white hover:bg-[#fbebb5] p-[6px] rounded"
+        className="bg-white hover:bg-[#f0d786] p-[6px] rounded"
       >
         <Search size={28} className="text-black" />
       </button>

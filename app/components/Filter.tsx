@@ -30,7 +30,7 @@ export default function Filter() {
           <p className="">Show</p>
           {/* "Show" option to select how many items to display */}
           <p className="text-[#9F9F9F] bg-white px-4 py-3">16</p>
-          <p className="">Short By</p>
+          <p className="">Sort By</p>
           {/* Sorting option with a default selection */}
           <p className="text-[#9F9F9F] bg-white px-10 py-2 text-left w-max">
             <span className="text-left">Default</span>

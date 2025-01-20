@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useCart } from "../context/CartContext"
 
-const ProductCard = ({name,price,imagePath,link}: {name: string, price: string , imagePath: string, link: string}) => {
+const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, price: string , imagePath: string, link: string,stockCount?:number}) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
@@ -38,8 +38,8 @@ const ProductCard = ({name,price,imagePath,link}: {name: string, price: string ,
         {/* Product Detail */}
         <div className="flex flex-col p-2 mt-4">
           <h3 className="cursor-pointer font-normal"><Link href={`/shop/${link}`}>{name}</Link></h3>
-          <p className="text-2xl mt-4">${price}
-          </p>
+          <p className="text-lg mt-2">{stockCount != null && (stockCount > 0 ? "In Stock" : "Sold")}</p>
+          <p className="text-2xl mt-2">${price}</p>
         </div>
     </div>
   )

@@ -15,7 +15,7 @@ const AddToCart = ({product}: {product: any}) => {
           _id: product._id,
           productTitle: product.productTitle,
           price: product.price,
-          image: product.images[0],
+          image: product.imageUrl,
           quantity: 1
         });
     }

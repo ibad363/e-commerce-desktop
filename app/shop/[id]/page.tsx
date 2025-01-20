@@ -1,48 +1,51 @@
 import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import ProductCard from '@/app/components/ProductCard';
-import { client } from '@/sanity/lib/client';
 import ProductImages from '@/app/components/ImageSelector';
 import Link from 'next/link';
 import AddToCart from '@/app/components/AddToCart';
+import { getFeaturedProduct, getProductById } from '@/sanity/queries/fetchProduct';
+import SizeSelector from '@/app/components/SizeSelector';
 
 const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
-    const productInfo = await client.fetch(`*[_type == "product" && _id == $id][0]{
-        name,
-        rating,
-        description,
-        sizes,
-        tags,
-        price,
-        image
-        }`,{id}, {cache: "no-store"});
+    const productInfo = await getProductById(id)
+    const FeaturedProducts:any = await getFeaturedProduct()
+    
+    // const allProducts = await client.fetch(`
+    //     *[_type == "product"] {
+    //         productTitle,
+    //         price,
+    //         images,
+    //         _id,
+    //     }
+    // `, {}, {cache: "no-store"});
 
-    const allProducts = await client.fetch(`
-        *[_type == "product"] {
-            productTitle,
-            price,
-            images,
-            _id,
-        }
-    `, {}, {cache: "no-store"});
-    const randomProducts = allProducts
-    .sort(() => Math.random() - 0.5)  // Randomize the order
-    .slice(0, 4);
 
-    const productDetail = [
-        {imagePath: "/assets/products/1.webp" , name: "Trenton modular sofa_3", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/2.webp" , name: "Granite dining table with dining chair", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/3.webp" , name: "Outdoor bar table and stool", price: "Rs. 25,000.00"},
-        {imagePath: "/assets/products/4.webp" , name: "Plain console with teak mirror", price: "Rs. 25,000.00"},
-    ]
+    // const randomProducts = allProducts
+    // .sort(() => Math.random() - 0.5)  // Randomize the order
+    // .slice(0, 4);
 
+    // 4 images
+    
     const images = [
-        productInfo.image,
-        productInfo.image,
-        productInfo.image,
-        productInfo.image,
+        productInfo?.imageUrl,
+        productInfo?.imageUrl,
+        productInfo?.imageUrl,
+        productInfo?.imageUrl,
     ];
+
+    const renderRating = () => {
+        return (
+            <div className='text-[#FFAD33] text-2xl mr-4'>
+                {Array.from({ length: 5 }, (_, index) => (
+                    <span key={index} className={`${index < (productInfo?.rating || 0) ? "text-[#FFAD33]" : "text-black opacity-25"}`}>
+                        ★
+                    </span>
+                ))}
+            </div>
+        )
+    }
 
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
@@ -53,7 +56,7 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
             <Link href={"/shop"}><p className="text-[#9F9F9F] hover:underline">Shop</p></Link>
             <ChevronRight className='mx-2 sm:ml-[21px] sm:mr-[25px]' />
             <div className='w-[1px] h-[1px] bg-[#9F9F9F]'></div>
-            <p className='border-l border-[#9F9F9F] pl-5 sm:pl-[34px]'>{productInfo.productTitle}</p>
+            <p className='border-l border-[#9F9F9F] pl-5 sm:pl-[34px]'>{productInfo?.name}</p>
         </div>
 
         {/* Images & Name Section */}
@@ -69,53 +72,56 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
                 <div className='flex flex-col'>
 
                     {/* Product Name */}
-                    <h3 className={`text-[42px] tracking-wide text-center md:text-start`}>{productInfo.name}</h3>
+                    <h3 className={`text-[32px] sm:text-[42px] tracking-wide text-center md:text-start`}>{productInfo?.name}</h3>
 
                     {/* Price */}
-                    <p className={`text-2xl font-medium text-center md:text-start`}>${productInfo.price}</p>
+                    <p className={`text-2xl font-medium text-center md:text-start`}>${productInfo?.price}</p>
 
                     {/* Rating & Reviews */}
                     <div className='flex justify-center md:justify-start items-center mt-[15px]'>
-                        <div className='text-[#FFAD33] text-2xl mr-4'>★★★★<span className='text-black opacity-25'>★</span></div>
-                        <p className='opacity-50 text-[14px] text-[#9F9F9F] font-normal mr-4 border-l-[#9F9F9F] border-l pl-4 text-center'>{productInfo.rating} Customer Rating</p>
-
+                        {renderRating()}
+                        <p className='opacity-50 text-[14px] text-[#9F9F9F] font-normal mr-4 border-l-[#9F9F9F] border-l pl-4'>
+                            {productInfo?.rating || 0} Customer Rating
+                        </p>
                     </div>
                 </div>
 
                 {/* Product Description */}
-                <p className='text-[13px] mt-[18px] text-center md:text-start'>{productInfo.description}</p>
+                <p className='text-[13px] mt-[18px] text-center md:text-start'>{productInfo?.description}</p>
 
                 {/* Tags */}
                 <div className='flex flex-col gap-3 mt-[18px] items-center md:items-start'>
                     <p className='text-[14px] text-[#9F9F9F] tracking-wide'>Tags</p>
                     <div className='flex items-center gap-4'>
                         <p className='text-black text-[13px] capitalize flex flex-wrap gap-2'>
-                            {productInfo.tags.map((tag:any)=>(
-                                <span>#{tag}</span>
+                            {productInfo?.tags.map((tag:any, i:number)=>(
+                                <span key={i}>#{tag}</span>
                             ))}
                         </p>
                     </div>
                 </div>
 
                 {/* Size */}
+                {productInfo?.sizes && productInfo.sizes.length > 0 && (
                 <div className='flex flex-col items-center md:items-start gap-[12px] mt-[22px]'>
                     <p className='text-[14px] text-[#9F9F9F] tracking-wide'>Size</p>
                     <div className='flex items-center gap-4 flex-wrap'>
-                        <div className='py-1 w-8 flex justify-center bg-[#FAF4F4] rounded font-medium hover:bg-[#FBEBB5] cursor-pointer'>L</div>
-                        <div className='py-1 w-8 flex justify-center bg-[#FAF4F4] rounded font-medium hover:bg-[#FBEBB5] cursor-pointer'>XL</div>
-                        <div className='py-1 w-8 flex justify-center bg-[#FAF4F4] rounded font-medium hover:bg-[#FBEBB5] cursor-pointer'>XS</div>
+                        {productInfo.sizes.map((size: string, index: number) => (
+                            <SizeSelector key={index} size={size} />
+                        ))}
                     </div>
                 </div>
+            )}
 
                 {/* Colors */}
-                <div className='flex flex-col gap-3 mt-[18px] items-center md:items-start'>
+                {/* <div className='flex flex-col gap-3 mt-[18px] items-center md:items-start'>
                     <p className='text-[14px] text-[#9F9F9F] tracking-wide'>Color</p>
                     <div className='flex items-center gap-4'>
                         <div className='bg-[#816DFA] w-[30px] h-[30px] rounded-full hover:border-2 hover:border-black'></div>
                         <div className='bg-black w-[30px] h-[30px] rounded-full hover:border-2 hover:border-black'></div>
                         <div className='bg-[#CDBA7B] w-[30px] h-[30px] rounded-full hover:border-2 hover:border-black'></div>
                     </div>
-                </div>
+                </div> */}
 
                 {/* add to cart */}
                 <AddToCart product={productInfo} />
@@ -133,12 +139,16 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
                     <div className='flex'>
                         <p className='w-[85px] ml-[16px]'>Category</p>
                         <span className='mr-[12px]'>:</span>
-                        <p>Sofas</p>
+                        <p>{productInfo?.category}</p>
                     </div>
                     <div className='flex'>
                         <p className='w-[85px] ml-[16px]'>Tags</p>
                         <span className='mr-[12px]'>:</span>
-                        <p>Sofa, Chair, Home, Shop</p>
+                        <p className='flex gap-2'>
+                            {productInfo?.tags.map((tag: any, i:number) => (
+                                <span key={i}>{tag}</span>
+                            ))}
+                        </p>
                     </div>
                     <div className='flex'>
                         <p className='w-[85px] ml-[16px]'>Share</p>
@@ -164,16 +174,16 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
             </div>
 
             <div className='max-w-[1026px] mx-auto text-[#9F9F9F] space-y-[30px] py-[37px] p-4 sm:p-0 border-b border-[#D9D9D9]'>
-                <p className='mt-[37px]'>Embodying the raw, wayward spirit of rock ‘n’ roll, the Kilburn portable active stereo speaker takes the unmistakable look and sound of Marshall, unplugs the chords, and takes the show on the road.</p>
-                <p className='pb-[36px]'>Weighing in under 7 pounds, the Kilburn is a lightweight piece of vintage styled engineering. Setting the bar as one of the loudest speakers in its class, the Kilburn is a compact, stout-hearted hero with a well-balanced audio which boasts a clear midrange and extended highs for a sound that is both articulate and pronounced. The analogue knobs allow you to fine tune the controls to your personal preferences while the guitar-influenced leather strap enables easy and stylish travel.</p>
+                <p className='mt-[37px]'>{productInfo?.description}</p>
+                <p className='pb-[36px]'>{productInfo?.description}</p>
             </div>
 
             <div className='max-w-[1240px] mx-auto px-2 mt-[36px] flex flex-col lg:flex-row items-center gap-[29px]'>
                 <div className='bg-[#f3e4b5] rounded-[10px] max-w-[605px] w-full h-[250px] sm:h-[348px]'>
-                    <Image src={"/assets/product-detail/s1.png"} alt="Sofa Image" width={400} height={400} className='object-contain w-full h-full'></Image>
+                    <Image src={productInfo.imageUrl} alt={productInfo.name} width={400} height={400} className='object-center w-full h-full rounded-[10px]'></Image>
                 </div>
                 <div className='bg-[#f3e4b5] rounded-[10px] max-w-[605px] w-full h-[250px] sm:h-[348px]'>
-                    <Image src={"/assets/product-detail/s2.png"} alt="Sofa Image" width={400} height={400} className='object-contain w-full h-full'></Image>
+                    <Image src={productInfo.imageUrl} alt={productInfo.name} width={400} height={400} className='object-center w-full h-full rounded-[10px]'></Image>
                 </div>
             </div>
 
@@ -187,9 +197,16 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
         <div>
             <p className='text-4xl font-medium mt-[26px] text-center'>Related Products</p>
             <div className='flex flex-wrap justify-center gap-[30px]'>
-                {/* {randomProducts.map((product:any, i:number) => {
-                    return( <ProductCard key={i} link={`/shop/${product._id}`} name={product.productTitle} price={product.price} imagePath={product.images[0]}/>)
-                })} */}
+            {FeaturedProducts.length > 0 ? (FeaturedProducts.map((product: any) => (
+                <ProductCard
+                    key={product._id}
+                    name={product.name}
+                    price={product.price}
+                    imagePath={product.imageUrl}
+                    link={product._id}
+                    stockCount={product.stockLevel}
+                />))) : <h1 className="text-center text-3xl">{`No Product Found`}</h1>
+            }
             </div>
 
             {/* View More Button*/}

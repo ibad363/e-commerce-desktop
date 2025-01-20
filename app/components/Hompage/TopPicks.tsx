@@ -1,36 +1,9 @@
-"use client"
-
-import { client } from "@/sanity/lib/client";
 import ProductCard from "../ProductCard"
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { getFeaturedProduct } from "@/sanity/queries/fetchProduct";
 
-const TopPicks = () => {
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(()=>{
-        async function fetchProducts() {
-            try {
-                const data = await client.fetch(
-                    `*[_type == "product"]{
-                        productTitle,
-                        price,
-                        "image": image.asset->url,
-                        _id
-                    }[0...4]`, {}, { cache: "no-store" })
-                console.log("products:",data)
-
-                setProducts(data)
-            } catch (error) {
-                console.log("Error Fetching Top Picks Products", error)
-            }finally{
-                setLoading(false)
-            }
-        }
-            
-        fetchProducts()
-    },[])
+const  TopPicks = async () => {
+    const products:any = await getFeaturedProduct()
     
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins font-medium">
@@ -67,24 +40,21 @@ const TopPicks = () => {
 
         {/* Products */}
         <div className="mt-[65px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {loading ? (
-                <p>Loading...</p>
-            ): (
-                products.map((product :any)=>(
-                    <ProductCard 
+            {products.length > 0 ? (products.map((product: any) => (
+                <ProductCard
                     key={product._id}
-                    name={product.productTitle}
+                    name={product.name}
                     price={product.price}
-                    imagePath={product.image}
+                    imagePath={product.imageUrl}
                     link={product._id}
-                    />
-                ))
-            )}
+                    stockCount={product.stockLevel}
+                />))) : <h1 className="text-center text-3xl">{`No Product Found`}</h1>
+            }
         </div>
 
         {/* View More Button*/}
         <div className="flex justify-center mt-[69px]">
-            <button className="w-[84px] hover:border-b border-black">View More</button>
+            <Link href={"/shop"} className="w-[84px] hover:border-b border-black">View More</Link>
         </div>
     </div>
   )

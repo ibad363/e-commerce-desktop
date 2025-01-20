@@ -1,20 +1,12 @@
 import ProductCard from "../components/ProductCard";
 import BgImage from "../components/BgImage";
 import DeliveryInfo from "../components/DeliveryInfo";
-import { client } from "@/sanity/lib/client";
+import { getAllProducts } from "@/sanity/queries/fetchProduct";
+import Filter from "../components/Filter";
 
 const Shop = async () => {
 
-    const products = await client.fetch(`*[_type == "product"]{
-        name,
-        _id,
-        tags,
-        sizes,
-        price,
-        description,
-        image,
-        rating
-    }`,{}, {cache: "no-store"});
+    const products:any = await getAllProducts()
 
     return (
     <div className="max-w-[1440px] mx-auto font-Poppins">
@@ -24,20 +16,22 @@ const Shop = async () => {
 
         {/* Filter Tab */}
         <div className="mt-[47px]">
-            
+            <Filter/>
         </div>
 
         {/* Products */}
         <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {products && (products.map((product :any)=>(
+            {products.length > 0 ? (products.map((product :any)=>(
                 <ProductCard 
                 key={product._id}
                 name={product.name}
                 price={product.price}
-                imagePath={product.image}   
+                imagePath={product.imageUrl}   
                 link={product._id}
+                stockCount={product.stockLevel}
                 />
-            )))}
+            ))): <h1 className="text-center text-3xl">No Product Found</h1>
+            }
         </div>
 
         {/* Page Number Section */}

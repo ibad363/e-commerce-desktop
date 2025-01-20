@@ -14,6 +14,7 @@ import Image from "next/image";
 import { useCart } from "../context/CartContext";
 import { urlFor } from "@/sanity/lib/image";
 import { Button } from "@/components/ui/button";
+import { SearchCommand } from "./SearchCommand";
 
 const Header = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false)
@@ -51,7 +52,8 @@ const Header = () => {
         {/* Icons */}
         <div className="flex items-center gap-8">
           <Link href={"/account"}><UserCheck className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
-          <Link href={"/"}><Search className="hover:bg-[#f0d786] p-[6px] rounded" size={37} /></Link>
+          <SearchCommand/>
+          {/* <Link href={"/"}><Search className="hover:bg-[#f0d786] p-[6px] rounded" size={37} /></Link> */}
           <Link href={"/"}><Heart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
           <button onClick={()=> setIsCartOpen(true)}><ShoppingCart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></button>
           <Menu className="sm:hidden cursor-pointer" onClick={()=> setIsNavbarOpen(true)} size={25}/>

@@ -17,7 +17,7 @@ const Shop = async () => {
         {/* Filter Tab */}
         <div className="mt-[47px]">
             <Filter/>
-        </div>
+x        </div>
 
         {/* Products */}
         <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">

@@ -78,3 +78,46 @@ export const getFeaturedProduct = async ()=> {
     return null;
   }
 };
+
+import { client } from "../lib/client"
+
+interface FilterOptions {
+  sort?: string;
+  limit?: number;
+  skip?: number;
+}
+
+export async function getFilteredProducts({ sort = 'default', limit = 16, skip = 0 }: FilterOptions) {
+  let query = '*[_type == "product"]'
+  
+  // Add sorting
+  switch (sort) {
+    case "price_low":
+      query += '| order(price asc)'
+      break
+    case "price_high":
+      query += '| order(price desc)'
+      break
+    case "name_asc":
+      query += '| order(name asc)'
+      break
+    case "name_desc":
+      query += '| order(name desc)'
+      break
+  }
+
+  // Add pagination
+  query += `[${skip}...${skip + limit}] {
+    _id,
+    name,
+    price,
+    "imageUrl": image.asset->url,
+    stockLevel
+  }`
+
+  return client.fetch(query)
+}
+
+export async function getTotalProducts() {
+  return client.fetch('count(*[_type == "product"])')
+}

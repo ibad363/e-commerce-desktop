@@ -1,5 +1,3 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { Search } from "lucide-react"
 import { client } from "@/sanity/lib/client"
@@ -25,74 +23,35 @@ export function SearchCommand() {
   const [open, setOpen] = useState(false)
   const [searchResults, setSearchResults] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
+  const [searchTerm, setSearchTerm] = useState("") // Added state for search input
   const router = useRouter()
 
-  // Initial products load
   useEffect(() => {
-    const fetchInitialProducts = async () => {
+    const fetchResults = async () => {
+      setLoading(true)
       try {
-        const query = `*[_type == "product"][0...5] {
-          _id,
-          name,
-          price,
-          "imageUrl": image.asset->url,
-          category
-        }`
+        const query = `*[_type == "product" && name match "*${searchTerm}*"] {
+              _id,
+              name,
+              price,
+              "imageUrl": image.asset->url,
+              category
+            }`
+        
         const results = await client.fetch(query)
         setSearchResults(results)
       } catch (error) {
-        console.error("Error fetching initial products:", error)
+        console.error("Search error:", error)
+        setSearchResults([])
+      } finally {
+        setLoading(false)
       }
     }
 
-    fetchInitialProducts()
-  }, [])
-
-  // Keyboard shortcut
-  useEffect(() => {
-    const down = (e: KeyboardEvent) => {
-      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
-        e.preventDefault()
-        setOpen((open) => !open)
-      }
+    if (open) {
+      fetchResults()
     }
-    document.addEventListener("keydown", down)
-    return () => document.removeEventListener("keydown", down)
-  }, [])
-
-  const handleSearch = async (searchTerm: string) => {
-    setLoading(true)
-    try {
-      if (!searchTerm.trim()) {
-        // Show initial products if search is empty
-        const query = `*[_type == "product"][0...5] {
-          _id,
-          name,
-          price,
-          "imageUrl": image.asset->url,
-          category
-        }`
-        const results = await client.fetch(query)
-        setSearchResults(results)
-      } else {
-        // Search based on input
-        const query = `*[_type == "product" && name match "*${searchTerm}*"] {
-          _id,
-          name,
-          price,
-          "imageUrl": image.asset->url,
-          category
-        }`
-        const results = await client.fetch(query)
-        setSearchResults(results)
-      }
-    } catch (error) {
-      console.error("Search error:", error)
-      setSearchResults([])
-    } finally {
-      setLoading(false)
-    }
-  }
+  }, [searchTerm,open]) // Ensure fetchResults runs when dialog opens or searchTerm changes
 
   return (
     <>
@@ -103,11 +62,11 @@ export function SearchCommand() {
         <Search size={28} className="text-black" />
       </button>
 
-      <CommandDialog open={open} onOpenChange={setOpen}>    
+      <CommandDialog open={open} onOpenChange={setOpen}>
         <div className="flex items-center border-b border-gray-200 px-3 bg-white">
-          <CommandInput 
-            placeholder="Search products..." 
-            onValueChange={handleSearch}
+          <CommandInput
+            placeholder="Search products..."
+            onValueChange={setSearchTerm} // Update `searchTerm` on input change
             className="flex h-11 w-full rounded-md bg-white py-3 text-sm outline-none placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-50 border-0"
           />
         </div>

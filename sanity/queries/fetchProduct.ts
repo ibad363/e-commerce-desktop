@@ -79,6 +79,25 @@ export const getFeaturedProduct = async ()=> {
   }
 };
 
+
+export const getProductBySearch = async (searchTerm:string)=> {
+  const SEARCH_PRODUCT_QUERY = defineQuery(`*[_type == "product" && name match "*${searchTerm}*"] {
+          _id,
+          name,
+          price,
+          "imageUrl": image.asset->url,
+          category
+        }`);
+  try {
+    const product = await sanityFetch({ query: SEARCH_PRODUCT_QUERY});
+    return product.data || null ;
+  } catch (error) {
+    console.error("Error fetching product by Search: " + error);
+    return null;
+  }
+};
+
+
 import { client } from "../lib/client"
 
 interface FilterOptions {

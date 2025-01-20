@@ -5,7 +5,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { useCart } from "../context/CartContext"
 
-const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, price: string , imagePath: string, link: string,stockCount?:number}) => {
+const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, price: string , imagePath: string, link: string,stockCount:number}) => {
   const { addToCart } = useCart();
 
   const handleAddToCart = () => {
@@ -14,7 +14,8 @@ const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, pric
       productTitle: name,
       price: price,
       image: imagePath,
-      quantity: 1
+      quantity: 1,
+      stockLevel: stockCount
     });
   }
 

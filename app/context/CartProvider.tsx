@@ -7,27 +7,52 @@ import { toast } from "react-toastify";
 const CartProvider = ({children}:{children : ReactNode}) => {
     const [cartItems, setCartItems] = useState<CartItem[]>([])
 
-    function addToCart (product: CartItem) {
-        setCartItems(currentCart => {
-            const existingItem = currentCart.find(eachItem=> eachItem._id === product._id)
-            
-            if (existingItem) {
-                toast.info("Product Quantity Updated!",{
-                    autoClose : 1000,
-                })
-                return currentCart.map(eachItem => {
-                    return eachItem._id === product._id
-                    ? {...eachItem, quantity: eachItem.quantity + 1}
-                    : eachItem
-                })
-                
+    const addToCart = (item: CartItem) => {
+        setCartItems((prevItems) => {
+          const existingItem = prevItems.find((i) => i._id === item._id);
+          if (existingItem) {
+            const newQuantity = existingItem.quantity + item.quantity;
+    
+            // Check if the updated quantity exceeds the stock level
+            if (newQuantity > existingItem.stockLevel) {
+              toast.error(`Cannot add more than ${existingItem.stockLevel} items of this product.`, {
+                autoClose: 1000,
+              });
+              return prevItems;
             }
-            
-            toast.success("Product Added to Cart!")     
-            return [...currentCart, {...product,quantity:1}]
-        }
-        )
-    }
+    
+            if (newQuantity > 5) {
+              toast.error("Cannot add more than 5 items of the same product.", {
+                autoClose: 1000,
+              });
+              return prevItems;
+            }
+    
+            toast.info("Product Quantity Updated!", { autoClose: 500 });
+            return prevItems.map((i) =>
+              i._id === item._id ? { ...i, quantity: newQuantity } : i
+            );
+          }
+    
+          // Check if the quantity exceeds stock before adding to the cart
+          if (item.quantity > item.stockLevel) {
+            toast.error(`Cannot add more than ${item.stockLevel} items of this product.`, {
+              autoClose: 1000,
+            });
+            return prevItems;
+          }
+    
+          if (item.quantity > 5) {
+            toast.error("Cannot add more than 5 items of the same product.", {
+              autoClose: 1000,
+            });
+            return prevItems;
+          }
+    
+          toast.success("Product Added to Cart!", { autoClose: 500 });
+          return [...prevItems, item];
+        });
+      };
 
     function removeFromCart (productId: string) {
         setCartItems(currentCart => currentCart.filter(eachItem=> eachItem._id !== productId))

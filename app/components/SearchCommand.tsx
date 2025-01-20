@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { Search } from "lucide-react"
 import { client } from "@/sanity/lib/client"
@@ -23,21 +25,24 @@ export function SearchCommand() {
   const [open, setOpen] = useState(false)
   const [searchResults, setSearchResults] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
-  const [searchTerm, setSearchTerm] = useState("") // Added state for search input
+  const [searchTerm, setSearchTerm] = useState("") // Search term state
   const router = useRouter()
 
   useEffect(() => {
     const fetchResults = async () => {
+      if (!searchTerm) {
+        setSearchResults([]) // Clear results if no search term
+        return
+      }
       setLoading(true)
       try {
         const query = `*[_type == "product" && name match "*${searchTerm}*"] {
-              _id,
-              name,
-              price,
-              "imageUrl": image.asset->url,
-              category
-            }`
-        
+          _id,
+          name,
+          price,
+          "imageUrl": image.asset->url,
+          category
+        }`
         const results = await client.fetch(query)
         setSearchResults(results)
       } catch (error) {
@@ -48,10 +53,8 @@ export function SearchCommand() {
       }
     }
 
-    if (open) {
-      fetchResults()
-    }
-  }, [searchTerm,open]) // Ensure fetchResults runs when dialog opens or searchTerm changes
+    fetchResults()
+  }, [searchTerm]) // Fetch results whenever searchTerm changes
 
   return (
     <>
@@ -66,7 +69,8 @@ export function SearchCommand() {
         <div className="flex items-center border-b border-gray-200 px-3 bg-white">
           <CommandInput
             placeholder="Search products..."
-            onValueChange={setSearchTerm} // Update `searchTerm` on input change
+            value={searchTerm}
+            onValueChange={setSearchTerm} // Update searchTerm on input change
             className="flex h-11 w-full rounded-md bg-white py-3 text-sm outline-none placeholder:text-gray-500 disabled:cursor-not-allowed disabled:opacity-50 border-0"
           />
         </div>

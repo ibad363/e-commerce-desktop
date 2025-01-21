@@ -16,7 +16,8 @@ const AddToCart = ({product}: {product: any}) => {
           productTitle: product.productTitle,
           price: product.price,
           image: product.imageUrl,
-          quantity: 1
+          quantity: 1,
+          stockLevel:product.stockLevel 
         });
     }
 

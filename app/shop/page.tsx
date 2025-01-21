@@ -14,6 +14,7 @@ const Shop = () => {
   const [itemsPerPage, setItemsPerPage] = useState(16);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortBy, setSortBy] = useState("default");
+  
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -84,7 +85,7 @@ const Shop = () => {
 
         {/* Products */}
         <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {filteredData.length > 0 ? (filteredData.map((product :any)=>(
+            {filteredData &&(filteredData.map((product :any)=>(
                 <ProductCard 
                 key={product._id}
                 name={product.name}
@@ -93,7 +94,7 @@ const Shop = () => {
                 link={product._id}
                 stockCount={product.stockLevel}
                 />
-            ))): <h1 className="text-center text-3xl">No Product Found</h1>
+            )))
             }
         </div>
 

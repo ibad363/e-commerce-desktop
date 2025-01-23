@@ -8,3 +8,11 @@ export interface CardData {
     isFeaturedProduct?:boolean;
     category?:string;
 }
+
+export interface Product {
+    _id: string
+    name: string
+    price: number
+    imageUrl: string
+    category?: string
+}

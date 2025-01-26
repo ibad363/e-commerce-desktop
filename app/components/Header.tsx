@@ -50,7 +50,7 @@ const Header = () => {
         </nav>
 
         {/* Icons */}
-        <div className="flex items-center gap-8">
+        <div className="flex items-center gap-4 sm:gap-8">
           <Link href={"/account"}><UserCheck className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
           <SearchBar/>
           <Link href={"/"}><Heart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
@@ -88,7 +88,7 @@ const Header = () => {
 
       {/* Cart */}
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
-        <SheetContent className="w-[300px] sm:w-[540px] bg-white h-[100vh] flex flex-col">
+        <SheetContent className="w-[300px] sm:w-[540px] bg-white max-h-screen flex flex-col">
           <SheetHeader>
             <SheetTitle className='text-2xl font-semibold'>Shopping Cart</SheetTitle>
               <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
@@ -139,11 +139,11 @@ const Header = () => {
               {/* Summary & Button */}
               <div>
                 {/* Cart Summary */}
-                <div className='flex justify-between mt-16'>
+                <div className='flex justify-between mt-2'>
                   <p>Subtotal</p>
                   <p className='text-[#B88E2F] font-semibold'>Rs. {calculateSubtotal()}.00</p>
                 </div>
-                <div className='h-[1px] bg-[#D9D9D9] mt-[26px]'></div>
+                <div className='h-[1px] bg-[#D9D9D9] mt-4'></div>
 
                 {/* Buttons */}
                 <div className='mt-[26px] flex justify-between gap-3'>

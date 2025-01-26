@@ -1,18 +1,18 @@
+import { CardData } from "@/app/utils/types"
 import Blog from "./Blog"
 import Hero from "./Hero"
 import Instagram from "./Instagram"
 import NewArrival from "./NewArrival"
 import TopPicks from "./TopPicks"
 
-
-const Homepage = () => {
+const Homepage = ({products}: {products:CardData[]}) => {
   return (
     <>
-    <Hero/>
-    {/* <TopPicks/> */}
-    <NewArrival/>
-    <Blog/>
-    <Instagram/>
+      <Hero />
+      <TopPicks products={products} />
+      <NewArrival />
+      <Blog />
+      <Instagram />
     </>
   )
 }

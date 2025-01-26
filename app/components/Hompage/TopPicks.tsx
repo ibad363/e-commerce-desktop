@@ -1,10 +1,8 @@
+import { CardData } from "@/app/utils/types";
 import ProductCard from "../ProductCard"
 import Link from "next/link";
-import { getFeaturedProduct } from "@/sanity/queries/fetchProduct";
 
-const  TopPicks = async () => {
-    const products:any = await getFeaturedProduct()
-    
+const  TopPicks = ({products}: {products:CardData[]}) => {
   return (
     <div className="max-w-[1440px] mx-auto font-Poppins font-medium">
         {/* Tables */}
@@ -29,33 +27,36 @@ const  TopPicks = async () => {
 
         </div>
 
-        {/* Top Picks */}
-        <div className="mt-[55px] max-w-[1240px] mx-auto p-4">
-            {/* description */}
-            <div className="px-2">
-                <h2 className="text-4xl text-center font-semibold">Top Picks For You</h2>
-                <p className="text-[#9F9F9F] text-center mt-4">Find a bright ideal to suit your taste with our great selection of suspension, floor and table lights.</p>
-            </div>
-        </div>
+        {products && (
+            <>
+                {/* Top Picks */}
+                <div className="mt-[55px] max-w-[1240px] mx-auto p-4">
+                    {/* description */}
+                    <div className="px-2">
+                        <h2 className="text-4xl text-center font-semibold">Top Picks For You</h2>
+                        <p className="text-[#9F9F9F] text-center mt-4">Find a bright ideal to suit your taste with our great selection of suspension, floor and table lights.</p>
+                    </div>
+                </div>
 
-        {/* Products */}
-        <div className="mt-[65px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {products.length > 0 ? (products.map((product: any) => (
-                <ProductCard
-                    key={product._id}
-                    name={product.name}
-                    price={product.price}
-                    imagePath={product.imageUrl}
-                    link={product._id}
-                    stockCount={product.stockLevel}
-                />))) : <h1 className="text-center text-3xl">{`No Product Found`}</h1>
-            }
-        </div>
+                {/* Products */}
+                <div className="mt-[65px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
+                    {products?.map((product: any) => (
+                        <ProductCard
+                            key={product._id}
+                            name={product.name}
+                            price={product.price}
+                            imagePath={product.imageUrl}
+                            link={product._id}
+                            stockCount={product.stockLevel}
+                        />))}
+                </div>
 
-        {/* View More Button*/}
-        <div className="flex justify-center mt-[69px]">
-            <Link href={"/shop"} className="w-[84px] hover:border-b border-black">View More</Link>
-        </div>
+                {/* View More Button*/}
+                <div className="flex justify-center mt-[69px]">
+                    <Link href={"/shop"} className="w-[84px] hover:border-b border-black">View More</Link>
+                </div>
+            </>
+        )}
     </div>
   )
 }

@@ -6,11 +6,12 @@ import Link from 'next/link';
 import AddToCart from '@/app/components/AddToCart';
 import { getFeaturedProduct, getProductById } from '@/sanity/queries/fetchProduct';
 import SizeSelector from '@/app/components/SizeSelector';
+import { CardData } from '@/app/utils/types';
 
 const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
     const productInfo = await getProductById(id)
-    const FeaturedProducts:any = await getFeaturedProduct()
+    const FeaturedProducts:CardData[] = await getFeaturedProduct()
       
     const images = [
         productInfo?.imageUrl,

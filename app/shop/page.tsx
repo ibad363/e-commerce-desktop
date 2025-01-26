@@ -2,14 +2,13 @@
 import ProductCard from "../components/ProductCard";
 import BgImage from "../components/BgImage";
 import DeliveryInfo from "../components/DeliveryInfo";
-import { getAllProducts } from "@/sanity/queries/fetchProduct";
 import Filter from "../components/Filter";
 import { useEffect, useState } from "react";
 import { CardData } from "../utils/types";
 
 
 const Shop = () => {
-    const [data, setData] = useState<CardData[]>([]);
+  const [data, setData] = useState<CardData[]>([]);
   const [filteredData, setFilteredData] = useState<CardData[]>([]);
   const [itemsPerPage, setItemsPerPage] = useState(16);
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -22,7 +21,6 @@ const Shop = () => {
       const products:CardData[] = await response.json();
       setData(products);
       setFilteredData(products);
-      
     };
 
     fetchProducts();
@@ -45,6 +43,7 @@ const Shop = () => {
     setSortBy(sortBy);
     filterProducts(selectedCategory, itemsPerPage, sortBy);
   };
+
 
   const filterProducts = (category: string, itemsPerPage: number, sortBy: string) => {
     let filtered = [...data];
@@ -75,16 +74,16 @@ const Shop = () => {
 
         {/* Filter Tab */}
         <div className="mt-[47px]">
-            <Filter
-        onCategoryChange={handleCategoryChange}
-        onItemsPerPageChange={handleItemsPerPageChange}
-        onSortChange={handleSortChange}
-        FilteredData={filteredData}
-      />
+          <Filter
+            onCategoryChange={handleCategoryChange}
+            onItemsPerPageChange={handleItemsPerPageChange}
+            onSortChange={handleSortChange}
+            FilteredData={filteredData}
+          />
       </div>
 
         {/* Products */}
-        <div className="mt-[17px] max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
+        <div className="mt-[17px] min-h-screen max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
             {filteredData &&(filteredData.map((product :any)=>(
                 <ProductCard 
                 key={product._id}

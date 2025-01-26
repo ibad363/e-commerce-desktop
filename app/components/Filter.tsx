@@ -1,5 +1,5 @@
 import { CardData } from "../utils/types";
-import React, { useState } from "react"; // Importing React
+import { useState } from "react";
 import { BiFilterAlt } from "react-icons/bi";
 import { BsGridFill } from "react-icons/bs";
 import { BsViewList } from "react-icons/bs";
@@ -47,63 +47,69 @@ export default function Filter({
   ];
 
   return (
-    <div className="bg-[#FAF4F4] flex justify-center items-center w-full">
-      <div className="md:h-[90px] h-[50px] gap-24 flex max-w-7xl justify-between items-center md:px-20 px-8 mt-6 md:mt-10">
-        <div className="flex justify-center items-center gap-2 md:gap-4 text-[16px]">
+    <div className="bg-[#FAF4F4] max-w-[1440px] py-6">
+      <div className="mx-auto px-8 md:px-20 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-0">
+        {/* Filter Section */}
+        <div className="flex justify-center items-center gap-4 text-sm md:text-base">
           <BiFilterAlt />
-          <p className="text-[10px] md:text-[16px]">Filter</p>
-          <BsGridFill />
-          <BsViewList />
+          <p className="hidden md:block">Filter</p>
+          <div className="flex gap-2 md:gap-4">
+            <BsGridFill />
+            <BsViewList />
+          </div>
           <p>|</p>
-          <p className="text-[10px] md:text-[16px]">
-            Showing 1–{itemsPerPage} of 32 results
+          <p className="text-xs md:text-sm">
+            Showing 1–{itemsPerPage} of {FilteredData.length} results
           </p>
         </div>
 
-        <div className="hidden md:flex justify-center items-center gap-2 md:gap-4 text-[10px] md:text-[16px] font-medium">
-          <p>Show</p>
-          <select
-            className="text-[#9F9F9F] bg-white px-4 py-3"
-            value={itemsPerPage}
-            onChange={handleItemsPerPageChange}
-          >
-            {[8, 16, 32].map((num) => (
-              <option key={num} value={num}>
-                {num}
-              </option>
-            ))}
-          </select>
+        {/* Controls for Show, Sort, and Category */}
+        <div className="flex flex-wrap justify-center items-center gap-4 text-xs md:text-sm font-medium">
+          {/* Show */}
+          <div className="flex items-center gap-2">
+            <p>Show</p>
+            <select
+              className="bg-white text-[#9F9F9F] px-4 py-2 rounded-md"
+              value={itemsPerPage}
+              onChange={handleItemsPerPageChange}
+            >
+              {[8, 16, 32].map((num) => (
+                <option key={num} value={num}>
+                  {num}
+                </option>
+              ))}
+            </select>
+          </div>
 
-          <p>Sort By</p>
-          <select
-            className="text-[#9F9F9F] bg-white px-10 py-2 text-left w-max"
-            value={sortBy}
-            onChange={handleSortChange}
-          >
-            <option value="default">Default</option>
-            <option value="price-low-to-high">Price: Low to High</option>
-            <option value="price-high-to-low">Price: High to Low</option>
-          </select>
+          {/* Sort By */}
+          <div className="flex items-center gap-2">
+            <p>Sort By</p>
+            <select
+              className="bg-white text-[#9F9F9F] px-4 py-2 rounded-md"
+              value={sortBy}
+              onChange={handleSortChange}
+            >
+              <option value="default">Default</option>
+              <option value="price-low-to-high">Price: Low to High</option>
+              <option value="price-high-to-low">Price: High to Low</option>
+            </select>
+          </div>
 
-          <p>Category</p>
-          <select
-            className="text-[#9F9F9F] bg-white px-4 py-3"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-          >
-            {uniqueCategories.map((product) => {
-              if (product === "All Product") {
-                return<option value={""}>All Products</option>;
-              }else{
-              return<option value={product}>{product}</option>;
-            }
-            })}
-            {/* <option value="">All</option>
-            <option value="furniture">Furniture</option>
-            <option value="electronics">Electronics</option>
-            <option value="appliances">Appliances</option> */}
-            {/* Add more categories as needed */}
-          </select>
+          {/* Category */}
+          <div className="flex items-center gap-2">
+            <p>Category</p>
+            <select
+              className="bg-white text-[#9F9F9F] px-4 py-2 rounded-md"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+            >
+              {uniqueCategories.map((product, index) => (
+                <option key={index} value={product === "All Product" ? "" : product}>
+                  {product === "All Product" ? "All Products" : product}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
     </div>

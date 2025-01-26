@@ -10,9 +10,16 @@ export interface CardData {
 }
 
 export interface Product {
-    _id: string
-    name: string
-    price: number
-    imageUrl: string
-    category?: string
+    _id: string;
+    name: string;
+    description: string;
+    price: number;
+    tags: string[];
+    sizes: string[];
+    imageUrl:string
+    rating: number;
+    discountpercentage?:number;
+    category?:string;
+    isFeaturedProduct?:boolean;
+    stockLevel?:number
 }

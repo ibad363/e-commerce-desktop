@@ -22,9 +22,15 @@ export const getAllProducts = async () => {
   const ALL_PRODUCTS_QUERY = defineQuery(`*[_type == "product"]{
     _id,
     name,
+    description,
+    price,
+    tags,
+    sizes,
     rating,
     "imageUrl": image.asset->url,
-    price,
+    category,
+    discountpercentage,
+    isFeaturedProduct,
     stockLevel,
 }`);
   try {

@@ -15,10 +15,13 @@ import { useCart } from "../context/CartContext";
 import { urlFor } from "@/sanity/lib/image";
 import { Button } from "@/components/ui/button";
 import { SearchBar } from "./SearchBar";
+import SignInButtonComponent from "./auth/loginButton";
+import { UserButton, useUser } from "@clerk/nextjs";
 
 const Header = () => {
   const [isNavbarOpen, setIsNavbarOpen] = useState(false)
   const [isCartOpen, setIsCartOpen] = useState(false)
+  const {isSignedIn } = useUser();
 
     const { cartItems, removeFromCart, updateQuantity } = useCart();
 
@@ -51,7 +54,14 @@ const Header = () => {
 
         {/* Icons */}
         <div className="flex items-center gap-4 sm:gap-8">
-          <Link href={"/account"}><UserCheck className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
+          {/* <Link href={"/account"}><UserCheck className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link> */}
+          {!isSignedIn ? (
+            <SignInButtonComponent  />
+          ) : (
+            <div className="flex justify-center items-center gap-2">
+              <UserButton />
+            </div>
+          )}
           <SearchBar/>
           <Link href={"/"}><Heart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
           <button onClick={()=> setIsCartOpen(true)}><ShoppingCart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></button>

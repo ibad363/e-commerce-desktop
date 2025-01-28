@@ -7,6 +7,13 @@ import CartProvider from "./context/CartProvider";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import { SanityLive } from "@/sanity/lib/live";
+import {
+  ClerkProvider,
+  SignInButton,
+  SignedIn,
+  SignedOut,
+  UserButton
+} from '@clerk/nextjs'
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +29,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <ClerkProvider>
     <html lang="en">
       <body className={inter.className}>
       <ToastContainer/>
@@ -33,5 +41,6 @@ export default function RootLayout({
         <SanityLive/>
       </body>
     </html>
+    </ClerkProvider>
   );
 }

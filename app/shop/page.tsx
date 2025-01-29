@@ -84,7 +84,7 @@ const Shop = () => {
 
         {/* Products */}
         <div className="mt-[17px] min-h-screen max-w-[1240px] w-full mx-auto flex flex-wrap justify-center gap-[30px]">
-            {filteredData &&(filteredData.map((product :any)=>(
+            {filteredData && (filteredData.map((product :CardData)=>(
                 <ProductCard 
                 key={product._id}
                 name={product.name}

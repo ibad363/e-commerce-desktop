@@ -5,8 +5,9 @@ import Image from "next/image"
 import Link from "next/link"
 import { useCart } from "../context/CartContext"
 
-const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, price: string , imagePath: string, link: string,stockCount:number}) => {
+const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, price: number , imagePath: string, link: string,stockCount:number}) => {
   const { addToCart } = useCart();
+
 
   const handleAddToCart = () => {
     addToCart({

@@ -5,7 +5,7 @@ import { NumberRule } from 'sanity';
 export interface CartItem {
     _id: string;
     productTitle: string;
-    price: string;
+    price: number;
     image: string;
     quantity: number;
     stockLevel: number

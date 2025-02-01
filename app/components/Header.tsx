@@ -100,7 +100,6 @@ const Header = () => {
           </SheetHeader>
         </SheetContent>
       </Sheet>
-
       {/* Cart */}
       <Sheet open={isCartOpen} onOpenChange={setIsCartOpen}>
         <SheetContent className="w-[300px] sm:w-[540px] bg-white max-h-screen flex flex-col">

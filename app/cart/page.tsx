@@ -28,7 +28,7 @@ const CartPage = () => {
   };
 
   const GST = () => {
-    return calculateTotal() * 10/100
+    return calculateTotal() * 10 / 100;
   };
   
   return (
@@ -154,16 +154,16 @@ const CartPage = () => {
           </h2>
           <div className="flex justify-between mt-14">
             <span className="font-medium">Subtotal</span>
-            <span className="#9F9F9F">Rs. {calculateTotal()}.00</span>
+            <span className="#9F9F9F">Rs. {(calculateTotal()).toFixed(2)}</span>
           </div>
           <div className="flex justify-between mt-4">
             <span className="font-medium">GST</span>
-            <span className="#9F9F9F">10% ({GST()})</span>
+            <span className="#9F9F9F">10% ({(GST()).toFixed(2)})</span>
           </div>
           <div className="flex justify-between mt-8">
             <span className="font-medium">Total</span>
             <span className="text-xl font-medium text-[#B88E2F]">
-              Rs. {calculateTotal() + GST()}.00
+              Rs. {(calculateTotal() + GST()).toFixed(2)}
             </span>
           </div>
           <div className="flex justify-center">

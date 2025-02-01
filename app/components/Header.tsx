@@ -33,9 +33,15 @@ const Header = () => {
     <header className="w-full mx-auto bg-white sticky top-0 font-Poppins border-b-[1px] border-black z-20 shadow-xl">
 
       <div className="max-w-[1240px] mx-auto h-[80px] flex items-center justify-between p-3">
+        {/* Logo */}
+        <div className="items-center hidden sm:flex">
+          <Link href={"/"}><Image src="/assets/main-logo.svg" alt="Logo" width={80} height={80}></Image></Link>
+          <Link href={"/"}><h1 className="text-xl font-extrabold">Furniro</h1></Link>
+        </div>
+
         {/* Navbar */}
         <nav className="font-medium flex flex-1 justify-center">
-        <ul className="hidden sm:flex gap-10">
+        <ul className="hidden md:flex gap-10">
             <li className="cursor-pointer hover:border-b-[#000000] hover:border-b-[0.5px] transition-all duration-300">
               <Link href="/">Home</Link>
             </li>
@@ -55,9 +61,9 @@ const Header = () => {
         {/* Icons */}
         <div className="flex items-center gap-4 sm:gap-8">
           <SearchBar/>
-          <Link href={"/"}><Heart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link>
+          {/* <Link href={"/"}><Heart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></Link> */}
           <button onClick={()=> setIsCartOpen(true)}><ShoppingCart className="hover:bg-[#f0d786] p-[6px] rounded" size={37}/></button>
-          <Menu className="sm:hidden cursor-pointer" onClick={()=> setIsNavbarOpen(true)} size={25}/>
+          <Menu className="md:hidden cursor-pointer" onClick={()=> setIsNavbarOpen(true)} size={25}/>
           {!isSignedIn ? (
             <SignInButtonComponent  />
           ) : (
@@ -150,7 +156,7 @@ const Header = () => {
                 {/* Cart Summary */}
                 <div className='flex justify-between mt-2'>
                   <p>Subtotal</p>
-                  <p className='text-[#B88E2F] font-semibold'>Rs. {calculateSubtotal()}.00</p>
+                  <p className='text-[#B88E2F] font-semibold'>Rs. {(calculateSubtotal()).toFixed(2)}</p>
                 </div>
                 <div className='h-[1px] bg-[#D9D9D9] mt-4'></div>
 

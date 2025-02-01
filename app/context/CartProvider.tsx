@@ -82,6 +82,10 @@ import { toast } from "react-toastify";
     });
   };
 
+  const clearCart = () => {
+    setCartItems([]);
+  };
+
   function removeFromCart(productId: string) {
     setCartItems((currentCart) =>
       currentCart.filter((eachItem) => eachItem._id !== productId)
@@ -111,6 +115,7 @@ import { toast } from "react-toastify";
           addToCart,
           removeFromCart,
           updateQuantity,
+          clearCart,
         }}
       >
         {children}

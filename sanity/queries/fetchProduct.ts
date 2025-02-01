@@ -1,22 +1,6 @@
-
 import { defineQuery } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
-
-interface Product {
-    _id: string;
-    _type: string;
-    imageUrl:string
-    sizes: string[];
-    description: string;
-    name: string;
-    price: number;
-    tags: string[];
-    rating: number;
-    category: string;
-    discountPercentage: number;
-    stockLevel:number;
-    isFeaturedProduct:boolean
-}
+import { Product } from "@/app/utils/types";
 
 export const getAllProducts = async () => {
   const ALL_PRODUCTS_QUERY = defineQuery(`*[_type == "product"]{
@@ -84,65 +68,3 @@ export const getFeaturedProduct = async ()=> {
     return null;
   }
 };
-
-
-export const getProductBySearch = async (searchTerm:string)=> {
-  const SEARCH_PRODUCT_QUERY = defineQuery(`*[_type == "product" && name match "*${searchTerm}*"] {
-          _id,
-          name,
-          price,
-          "imageUrl": image.asset->url,
-          category
-        }`);
-  try {
-    const product = await sanityFetch({ query: SEARCH_PRODUCT_QUERY});
-    return product.data || null ;
-  } catch (error) {
-    console.error("Error fetching product by Search: " + error);
-    return null;
-  }
-};
-
-
-import { client } from "../lib/client"
-
-interface FilterOptions {
-  sort?: string;
-  limit?: number;
-  skip?: number;
-}
-
-export async function getFilteredProducts({ sort = 'default', limit = 16, skip = 0 }: FilterOptions) {
-  let query = '*[_type == "product"]'
-  
-  // Add sorting
-  switch (sort) {
-    case "price_low":
-      query += '| order(price asc)'
-      break
-    case "price_high":
-      query += '| order(price desc)'
-      break
-    case "name_asc":
-      query += '| order(name asc)'
-      break
-    case "name_desc":
-      query += '| order(name desc)'
-      break
-  }
-
-  // Add pagination
-  query += `[${skip}...${skip + limit}] {
-    _id,
-    name,
-    price,
-    "imageUrl": image.asset->url,
-    stockLevel
-  }`
-
-  return client.fetch(query)
-}
-
-export async function getTotalProducts() {
-  return client.fetch('count(*[_type == "product"])')
-}

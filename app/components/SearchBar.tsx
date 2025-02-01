@@ -45,7 +45,7 @@ export function SearchBar() {
   }, []);
 
   // Debounce function
-  const debounce = <T extends (...args: string[]) => void>(func: T, wait: number) => {
+  const debounce = <T extends (...args: string[]) => void> (func: T, wait: number) => {
     let timeout: NodeJS.Timeout;
     return (...args: Parameters<T>) => {
       clearTimeout(timeout);

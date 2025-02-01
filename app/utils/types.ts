@@ -23,3 +23,16 @@ export interface Product {
     isFeaturedProduct?:boolean;
     stockLevel?:number
 }
+
+export interface CheckoutForm{
+  name: string;
+  companyName?: string;
+  country: string;
+  streetAddress: string;
+  city: string;
+  province: string;
+  zipCode: string;
+  phone: string;
+  email: string;
+  paymentMethod: "card" | "cod";
+}

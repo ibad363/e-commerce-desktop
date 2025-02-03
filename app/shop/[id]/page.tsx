@@ -12,7 +12,7 @@ const ProductDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
     const productInfo = await getProductById(id)
     const FeaturedProducts:CardData[] = await getFeaturedProduct()
-      
+    // console.log(productInfo)
     const images = [
         productInfo?.imageUrl,
         productInfo?.imageUrl,

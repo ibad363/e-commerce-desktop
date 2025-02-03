@@ -13,12 +13,14 @@ const AddToCart = ({product}: {product: any}) => {
     const handleAddToCart = () => {
         addToCart({
           _id: product._id,
-          productTitle: product.productTitle,
+          name: product.name,
           price: product.price,
           image: product.imageUrl,
           quantity: 1,
           stockLevel:product.stockLevel 
         });
+        
+      console.log("Savein Cart",cartItems)
     }
 
   return (

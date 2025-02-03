@@ -118,7 +118,7 @@ const Header = () => {
                         src={urlFor(item.image).url()}
                         width={120}
                         height={95}
-                        alt={item.productTitle}
+                        alt={item.name}
                         className='w-full h-full object-contain bg-[#fbebb5] flex p-1 justify-center items-center rounded'
                       />
                         <button onClick={() => removeFromCart(item._id)} className="-top-1 -right-2 absolute">
@@ -129,7 +129,7 @@ const Header = () => {
                     {/* Details */}
                     <div className='flex flex-col gap-1'>
                       {/* Product Title */}
-                      <p>{item.productTitle}</p>
+                      <p>{item.name}</p>
                       {/* Quantity & Price */}
                       <div>
                         {item.quantity} X <span className='ml-[2px] text-[#B88E2F]'>${item.price}</span>

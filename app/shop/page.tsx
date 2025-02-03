@@ -16,10 +16,11 @@ const Shop = () => {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const response = await fetch("/api/product");
+      const response = await fetch("/api/product",{cache:"no-store"});
       const products:CardData[] = await response.json();
       setData(products);
       setFilteredData(products);
+      console.log("products",products)
     };
 
     fetchProducts();

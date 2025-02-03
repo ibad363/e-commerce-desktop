@@ -18,7 +18,7 @@ export const getAllProducts = async () => {
     stockLevel,
 }`);
   try {
-    const products = await sanityFetch({ query: ALL_PRODUCTS_QUERY });
+    const products = await sanityFetch({ query: ALL_PRODUCTS_QUERY});
     return products.data || [];
   } catch (error) {
     console.error("error fetching all products " + error);

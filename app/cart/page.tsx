@@ -54,12 +54,12 @@ const CartPage = () => {
                   <TableCell className="flex  items-center gap-2 sm:gap-4 ">
                     <Image
                       src={urlFor(item.image).url()}
-                      alt={item.productTitle}
+                      alt={item.name}
                       width={70}
                       height={70}
                       className="rounded-[4px] w-[70px] h-[70px] bg-[#fbebb5]"
                     ></Image>
-                    <p className="break-words">{item.productTitle}</p>
+                    <p className="break-words">{item.name}</p>
                   </TableCell>
                   <TableCell>Rs. {item.price}.00</TableCell>
                   <TableCell>
@@ -110,12 +110,12 @@ const CartPage = () => {
                   <TableCell className="flex flex-col items-center gap-1 ">
                     <Image
                       src={urlFor(item.image).url()}
-                      alt={item.productTitle}
+                      alt={item.name}
                       width={70}
                       height={70}
                       className="rounded-[4px] w-[70px] h-[70px] bg-[#fbebb5]"
                     ></Image>
-                    <p className="text-center">{item.productTitle}</p>
+                    <p className="text-center">{item.name}</p>
                     <span>Rs. {item.price}.00</span>
                     <div className="flex items-center gap-2">
                     <Button variant="ghost" className="rounded-[5px] text-black hover:bg-[#f0d786] hover:text-black cursor-pointer px-2"

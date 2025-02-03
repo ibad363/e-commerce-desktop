@@ -35,7 +35,7 @@ export async function POST(req: NextRequest) {
       line_items: addCart.map((item: CartItem) => ({
         price_data: {
           currency: "usd",
-          product_data: { name: item.productTitle },
+          product_data: { name: item.name },
           unit_amount: item.price * 100, // Convert to cents
         },
         quantity: item.quantity,

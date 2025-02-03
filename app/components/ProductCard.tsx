@@ -12,7 +12,7 @@ const ProductCard = ({name,price,imagePath,link,stockCount}: {name: string, pric
   const handleAddToCart = () => {
     addToCart({
       _id: link,
-      productTitle: name,
+      name: name,
       price: price,
       image: imagePath,
       quantity: 1,

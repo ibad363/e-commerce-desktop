@@ -281,7 +281,7 @@ const Checkout = () => {
           <div className="space-y-5 mt-[14px]">
             {cartItems.map((item =>
               <div className='flex justify-between'>
-                <p className="text-[#4e4e4e]">{item.productTitle} <span className='text-black mx-2'>X</span>{item.quantity}</p>
+                <p className="text-[#4e4e4e]">{item.name} <span className='text-black mx-2'>X</span>{item.quantity}</p>
                 <span className="font-light">$ {Number(item.price) * item.quantity}</span>
               </div>
             ))}

@@ -13,7 +13,6 @@ const Shop = () => {
   const [itemsPerPage, setItemsPerPage] = useState(16);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortBy, setSortBy] = useState("default");
-  
 
   useEffect(() => {
     const fetchProducts = async () => {

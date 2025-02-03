@@ -1,6 +1,5 @@
 'use client'
 import { createContext, useContext } from 'react';
-import { NumberRule } from 'sanity';
 
 export interface CartItem {
     _id: string;

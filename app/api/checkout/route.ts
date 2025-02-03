@@ -7,12 +7,13 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
 });
 
 
+
 export async function POST(req: NextRequest) {
   try {
     const { addCart, billingDetails, paymentMethod } = await req.json();
-    // console.log("addCart", addCart);
-    // console.log("billingDetails", billingDetails);
-    // console.log("paymentMethod", paymentMethod);
+    console.log("addCart", addCart);
+    console.log("billingDetails", billingDetails);
+    console.log("paymentMethod", paymentMethod);
     if (!addCart || !Array.isArray(addCart)) {
       return NextResponse.json({ error: "Invalid cart data" }, { status: 400 });
     }
@@ -46,3 +47,5 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "unknown error" }, { status: 500 });
   }
 }
+
+

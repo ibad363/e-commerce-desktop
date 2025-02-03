@@ -16,7 +16,7 @@ export default defineType({
       name: "customer",
       title: "Customer",
       type: "reference",
-      to: [{ type: "user" }], // Assuming you have a 'user' schema
+      to: [{ type: "customer" }], // Assuming you have a 'user' schema
       validation: (Rule) => Rule.required(),
     }),
     defineField({
